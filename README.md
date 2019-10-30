@@ -1,1 +1,3 @@
-MoteurPhysique2
+# <%= project_name %> 
+
+<%= project_description %>
