@@ -110,6 +110,6 @@ Vecteur3D Vecteur3D::normalise()
 }
 
 std::string Vecteur3D::print() {
-    std::string result = "[" + std::to_string(m_x) + ";" + std::to_string(m_y) + ";" + std::to_string(m_z) + "]";
+    std::string result("[" + std::to_string(m_x) + ";" + std::to_string(m_y) + ";" + std::to_string(m_z) + "]");
     return result;
 }
