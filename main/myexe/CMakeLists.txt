@@ -7,10 +7,12 @@ set(INCLUDE_FOLDER ${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${INCLUDE_FOLDER})
 
 #Source files
-set(SOURCES ${SOURCE_FOLDER}/main.cpp)
+set(SOURCES ${SOURCE_FOLDER}/main.cpp
+	        ${SOURCE_FOLDER}/Matrix3.cpp)
 
 #Headers files (for IntelliSense)
-set(HEADERS ${INCLUDE_FOLDER}/main.hpp)
+set(HEADERS ${INCLUDE_FOLDER}/main.hpp
+	        ${INCLUDE_FOLDER}/Matrix3.hpp)
 
 #Main exec
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
