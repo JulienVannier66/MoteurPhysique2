@@ -1,6 +1,7 @@
 #pragma once
 #include <cmath>
 #include <iostream>
+#include <string>
 
 /*
  Cette classe represente un vecteur contenant 3 coordonnees
@@ -44,4 +45,5 @@ public:
     Vecteur3D normalise();										// Retourne le vecteur normalise
 
     friend std::ostream& operator<<(std::ostream& p_out, const Vecteur3D& p_vecteur); // Affichage par le flux
+    std::string print();
 };
