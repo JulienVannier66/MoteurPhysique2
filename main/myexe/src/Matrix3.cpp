@@ -3,13 +3,17 @@
 Matrix3 Matrix3::operator+(Matrix3 const& p_mat)
 {
     std::vector<float> l_temp_mat;
-    for (int i = 0; i < 8; i++) { l_temp_mat.push_back(m_matrice[i] + p_mat.m_matrice[i]); }
-    return Matrix3(l_temp_mat);
+    for (int i = 0; i < 9; i++)
+	{
+		l_temp_mat.push_back(m_matrice[i] + p_mat.m_matrice[i]); 
+	}
+    Matrix3 mat(l_temp_mat);
+    return mat;
 }
 
 Matrix3& Matrix3::operator+=(Matrix3 const& p_mat)
 {
-    for (int i = 0; i < 8; i++) { m_matrice[i] += p_mat.m_matrice[i]; }
+    for (int i = 0; i < 9; i++) { m_matrice[i] += p_mat.m_matrice[i]; }
     return *this;
 }
 
@@ -104,21 +108,6 @@ void Matrix3::transpose()
     m_matrice[7] = temp3;
 }
 
-Matrix3 Matrix3::transpose(Matrix3 const p_mat)
-{
-    std::vector<float> l_temp_mat;
-    l_temp_mat.push_back(p_mat.m_matrice[0]);
-    l_temp_mat.push_back(p_mat.m_matrice[3]);
-    l_temp_mat.push_back(p_mat.m_matrice[6]);
-    l_temp_mat.push_back(p_mat.m_matrice[1]);
-    l_temp_mat.push_back(p_mat.m_matrice[4]);
-    l_temp_mat.push_back(p_mat.m_matrice[7]);
-    l_temp_mat.push_back(p_mat.m_matrice[2]);
-    l_temp_mat.push_back(p_mat.m_matrice[5]);
-    l_temp_mat.push_back(p_mat.m_matrice[8]);
-    return Matrix3(l_temp_mat);
-}
-
 void Matrix3::inverse()
 {
     float l_terme0 = m_matrice[4] * m_matrice[8] - m_matrice[5] * m_matrice[7];
@@ -146,30 +135,6 @@ void Matrix3::inverse()
         std::cout << "le determinant est nul, impossible d'inverser la matrice" << std::endl;
 }
 
-Matrix3 Matrix3::inverse(Matrix3 const p_mat)
-{
-    std::vector<float> l_temp_mat;
-    l_temp_mat.push_back(p_mat.m_matrice[4] * p_mat.m_matrice[8] -
-                         p_mat.m_matrice[5] * p_mat.m_matrice[7]);
-    l_temp_mat.push_back(p_mat.m_matrice[2] * p_mat.m_matrice[7] -
-                         p_mat.m_matrice[1] * p_mat.m_matrice[8]);
-    l_temp_mat.push_back(p_mat.m_matrice[1] * p_mat.m_matrice[5] -
-                         p_mat.m_matrice[2] * p_mat.m_matrice[4]);
-    l_temp_mat.push_back(p_mat.m_matrice[5] * p_mat.m_matrice[6] -
-                         p_mat.m_matrice[3] * p_mat.m_matrice[8]);
-    l_temp_mat.push_back(p_mat.m_matrice[0] * p_mat.m_matrice[8] -
-                         p_mat.m_matrice[2] * p_mat.m_matrice[6]);
-    l_temp_mat.push_back(p_mat.m_matrice[2] * p_mat.m_matrice[3] -
-                         p_mat.m_matrice[0] * p_mat.m_matrice[5]);
-    l_temp_mat.push_back(p_mat.m_matrice[3] * p_mat.m_matrice[7] -
-                         p_mat.m_matrice[4] * p_mat.m_matrice[6]);
-    l_temp_mat.push_back(p_mat.m_matrice[1] * p_mat.m_matrice[6] -
-                         p_mat.m_matrice[0] * p_mat.m_matrice[7]);
-    l_temp_mat.push_back(p_mat.m_matrice[0] * p_mat.m_matrice[4] -
-                         p_mat.m_matrice[1] * p_mat.m_matrice[3]);
-    return Matrix3(l_temp_mat);
-}
-
 float Matrix3::determinant()
 {
     float l_res =
@@ -179,7 +144,7 @@ float Matrix3::determinant()
     return l_res;
 }
 
-//Matrix3 Matrix3::setOrientation(Quaternion p_quat)
+// Matrix3 Matrix3::setOrientation(Quaternion p_quat)
 //{
 //    float w = p_quat.at(0);
 //    float x = p_quat.at(1);
@@ -203,8 +168,13 @@ float Matrix3::determinant()
 //    return Matrix3(myvec);
 //}
 
-// std::string Matrix3::print()
-//{
-//	std::string str = "" + m_matrice.at(0);
-//	return "" + m_matrice.at(0)+ " ";
-//}
+std::string Matrix3::print()
+{
+    std::string str("");
+    for (int i = 0; i < 9; i++)
+    {
+        str += std::to_string(m_matrice[i]);
+        str += " ";
+    }
+    return str;
+}
