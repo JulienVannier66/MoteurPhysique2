@@ -1,3 +1,4 @@
+#pragma once
 #include <Vecteur3D.hpp>
 #include <iostream>
 #include <string>
@@ -51,8 +52,7 @@ public:
     }
 
 	/*constructeur value avec un 9 float*/
-    Matrix3(float x1, float x2, float x3, float x4, float x5, float x6, float x7, float x8,
-            float x9)
+    Matrix3(float x1, float x2, float x3, float x4, float x5, float x6, float x7, float x8, float x9)
     {
         m_matrice.push_back(x1);
         m_matrice.push_back(x2);

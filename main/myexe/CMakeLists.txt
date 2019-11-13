@@ -17,7 +17,8 @@ set(HEADERS ${INCLUDE_FOLDER}/main.hpp
 			${INCLUDE_FOLDER}/Test_Vecteur3D.hpp
 			${INCLUDE_FOLDER}/Assert.hpp
 			${INCLUDE_FOLDER}/Debug.hpp
-			${INCLUDE_FOLDER}/Matrix3.hpp)
+			${INCLUDE_FOLDER}/Matrix3.hpp
+			${INCLUDE_FOLDER}/Test_Matrix3.hpp)
 
 #Main exec
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})

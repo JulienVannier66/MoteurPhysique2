@@ -1,12 +1,10 @@
+#pragma once
 #include <Matrix3.hpp>
 
 Matrix3 Matrix3::operator+(Matrix3 const& p_mat)
 {
     std::vector<float> l_temp_mat;
-    for (int i = 0; i < 9; i++)
-	{
-		l_temp_mat.push_back(m_matrice[i] + p_mat.m_matrice[i]); 
-	}
+    for (int i = 0; i < 9; i++) { l_temp_mat.push_back(m_matrice[i] + p_mat.m_matrice[i]); }
     Matrix3 mat(l_temp_mat);
     return mat;
 }
@@ -119,18 +117,19 @@ void Matrix3::inverse()
     float l_terme6 = m_matrice[3] * m_matrice[7] - m_matrice[4] * m_matrice[6];
     float l_terme7 = m_matrice[1] * m_matrice[6] - m_matrice[0] * m_matrice[7];
     float l_terme8 = m_matrice[0] * m_matrice[4] - m_matrice[1] * m_matrice[3];
-    m_matrice[0] = l_terme0;
-    m_matrice[1] = l_terme1;
-    m_matrice[2] = l_terme2;
-    m_matrice[3] = l_terme3;
-    m_matrice[4] = l_terme4;
-    m_matrice[5] = l_terme5;
-    m_matrice[6] = l_terme6;
-    m_matrice[7] = l_terme7;
-    m_matrice[8] = l_terme8;
-    float l_det;
-    if (l_det = determinant() != 0)
-        *this *= 1 / (l_det);
+    float l_det = determinant();
+    if (l_det != 0)
+    {
+        m_matrice[0] = l_terme0 / l_det;
+        m_matrice[1] = l_terme1 / l_det;
+        m_matrice[2] = l_terme2 / l_det;
+        m_matrice[3] = l_terme3 / l_det;
+        m_matrice[4] = l_terme4 / l_det;
+        m_matrice[5] = l_terme5 / l_det;
+        m_matrice[6] = l_terme6 / l_det;
+        m_matrice[7] = l_terme7 / l_det;
+        m_matrice[8] = l_terme8 / l_det;
+    }
     else
         std::cout << "le determinant est nul, impossible d'inverser la matrice" << std::endl;
 }
@@ -173,8 +172,17 @@ std::string Matrix3::print()
     std::string str("");
     for (int i = 0; i < 9; i++)
     {
-        str += std::to_string(m_matrice[i]);
-        str += " ";
+        if (m_matrice[i] == 0.00000f)
+        {
+            str += std::to_string(0.000000);
+            str += " ";
+        }
+        else
+        {
+
+            str += std::to_string(m_matrice[i]);
+            str += " ";
+        }
     }
     return str;
 }

@@ -1,3 +1,4 @@
+#pragma once
 #include <Assert.hpp>
 #include <Debug.hpp>
 #include <Vecteur3D.hpp>
