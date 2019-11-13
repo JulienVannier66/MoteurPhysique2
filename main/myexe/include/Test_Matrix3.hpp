@@ -172,6 +172,21 @@ public:
             SetConsoleTextAttribute(hConsole, 12);
             std::cerr << "operateur *=(float) --- KO" << std::endl;
         }
+        try
+        {
+            Vecteur3D vec(4, -3, 2);
+            Matrix3 matrice_test_mult_vec(4.0f, 2.0f, -2.0f, 6.0f, 13.0f, -2.0f, 5.6f, 8.2f,7.1f);
+            std::cout << "matrice" << matrice_test_mult_vec.print() << std::endl;
+            std::cout << "vec" <<  vec.print() << std::endl;
+            std::cout << "mult vec" << (matrice_test_mult_vec*vec).print() << std::endl;
+            Assert<Wrong>(!CHECK_WRONG || (matrice_test_mult_vec*vec).print() == "[6.000000;-19.000000;12.000001]");
+            SetConsoleTextAttribute(hConsole, 10);
+            std::cout << "operateur *(Vecteur3D) --- OK" << std::endl;
+        } catch (Wrong e)
+        {
+            SetConsoleTextAttribute(hConsole, 12);
+            std::cerr << "operateur *(Vecteur3D) --- KO" << std::endl;
+        }
     }
 
     void test_transpose()

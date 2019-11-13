@@ -81,12 +81,12 @@ Matrix3& Matrix3::operator*=(float const& p_number)
 Vecteur3D Matrix3::operator*(Vecteur3D const& p_vec)
 {
     std::vector<float> l_temp_vec;
-    l_temp_vec.push_back(m_matrice[0] * p_vec.getX() + m_matrice[1] * p_vec.getY() +
-                         m_matrice[2] * p_vec.getZ());
-    l_temp_vec.push_back(m_matrice[3] * p_vec.getX() + m_matrice[4] * p_vec.getY() +
-                         m_matrice[5] * p_vec.getZ());
-    l_temp_vec.push_back(m_matrice[6] * p_vec.getX() + m_matrice[7] * p_vec.getY() +
-                         m_matrice[8] * p_vec.getZ());
+    std::cout << "ligne 1 :  " << m_matrice[0] * p_vec.getX() << "  " << m_matrice[1] * p_vec.getY()
+              << "  " << m_matrice[2] * p_vec.getZ() << std::endl;
+    std::cout << "ligne 2 :  " << m_matrice[3] * p_vec.getX() << "  " << m_matrice[4] * p_vec.getY()
+              << "  " << m_matrice[5] * p_vec.getZ() << std::endl;
+    std::cout << "ligne 3 :  " << m_matrice[6] * p_vec.getX() << "  " << m_matrice[7] * p_vec.getY()
+              << "  " << m_matrice[8] * p_vec.getZ() << std::endl;
     return Vecteur3D(
         m_matrice[0] * p_vec.getX() + m_matrice[1] * p_vec.getY() + m_matrice[2] * p_vec.getZ(),
         m_matrice[3] * p_vec.getX() + m_matrice[4] * p_vec.getY() + m_matrice[5] * p_vec.getZ(),

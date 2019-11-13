@@ -9,8 +9,8 @@
 
 int main(void)
 {
-    //testVecteur3D();
-   // testMatrix3();
+    // testVecteur3D();
+    // testMatrix3();
     Test_Matrix3 testMatrix3;
     testMatrix3.test_creation();
     testMatrix3.test_opération();
@@ -19,7 +19,7 @@ int main(void)
     testMatrix3.test_inverse();
     std::cin.ignore();
     return 0;
-
+}
 /*
     void testVecteur3D()
 {

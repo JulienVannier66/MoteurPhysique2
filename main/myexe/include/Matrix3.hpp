@@ -127,8 +127,8 @@ public:
     void inverse();
 
     float determinant();
-    /*
-        Matrix3 setOrientation(Quaternion p_quat);*/
+   
+    //Matrix3 setOrientation(Quaternion p_quat);
 
     std::string print();
 };
