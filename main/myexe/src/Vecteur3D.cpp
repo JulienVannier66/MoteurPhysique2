@@ -108,3 +108,8 @@ Vecteur3D Vecteur3D::normalise()
     return (l_longueur == 0) ? Vecteur3D(0, 0, 0)
                              : Vecteur3D(m_x / l_longueur, m_y / l_longueur, m_z / l_longueur);
 }
+
+std::string Vecteur3D::print() {
+    std::string result("[" + std::to_string(m_x) + ";" + std::to_string(m_y) + ";" + std::to_string(m_z) + "]");
+    return result;
+}
