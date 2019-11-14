@@ -14,7 +14,7 @@ void Quaternion::normalize()
 
     float l_d = l_r * l_r + l_i * l_i + l_j * l_j + l_k * l_k;
 
-    if (l_d = 0)
+    if (l_d == 0)
     {
         l_r = 1;
         m_data.at(0) = l_r;
@@ -85,26 +85,26 @@ Quaternion Quaternion::operator*(const Quaternion& p_quaternion)
     return l_result;
 }
 
-//Quaternion& Quaternion::operator*=(const float p_float) {
-//
-//	m_data.at(0) *= p_float;
-//	m_data.at(1) *= p_float;
-//	m_data.at(2) *= p_float;
-//	m_data.at(3) *= p_float;
-//
-//	return *this;
-//
-//}
-//Quaternion Quaternion::operator*(const float p_float) {
-//
-//	Quaternion l_result;
-//    l_result.m_data.at(0) = m_data.at(0) * p_float;
-//    l_result.m_data.at(1) = m_data.at(1) * p_float;
-//    l_result.m_data.at(2) = m_data.at(2) * p_float;
-//    l_result.m_data.at(3) = m_data.at(3) * p_float;
-//    return l_result;
-//
-//}
+Quaternion& Quaternion::operator*=(const float p_float) {
+
+	m_data.at(0) *= p_float;
+	m_data.at(1) *= p_float;
+	m_data.at(2) *= p_float;
+	m_data.at(3) *= p_float;
+
+	return *this;
+
+}
+Quaternion Quaternion::operator*(const float p_float) {
+
+	Quaternion l_result;
+    l_result.m_data.at(0) = m_data.at(0) * p_float;
+    l_result.m_data.at(1) = m_data.at(1) * p_float;
+    l_result.m_data.at(2) = m_data.at(2) * p_float;
+    l_result.m_data.at(3) = m_data.at(3) * p_float;
+    return l_result;
+
+}
 
 Quaternion& Quaternion::operator+=(const Quaternion& p_quaternion)
 {
@@ -140,7 +140,7 @@ void Quaternion::faireRotation(Vecteur3D p_vecteur)
     Quaternion q = Quaternion(l_vector);
 
     // faire self . q
-    this *= q;
+    *this*=q;
 }
 
 // UpdateAngularVelocity
@@ -158,6 +158,6 @@ void Quaternion::updateAngularVelocity(Vecteur3D p_vecteur, float p_temps)
     Quaternion l_w = Quaternion(l_vector);
 
     Quaternion l_produit;
-	l_produit = this * l_w;
-    this = this + ((p_temps / 2) * l_produit);
+	l_produit = *this * l_w;
+    *this = *this + (l_produit *(p_temps / 2));
 }

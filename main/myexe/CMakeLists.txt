@@ -17,10 +17,8 @@ set(HEADERS ${INCLUDE_FOLDER}/main.hpp
 			${INCLUDE_FOLDER}/Vecteur3D.hpp
 			${INCLUDE_FOLDER}/Test_Vecteur3D.hpp
 			${INCLUDE_FOLDER}/Assert.hpp
-			${INCLUDE_FOLDER}/Debug.hpp)
-set(HEADERS ${INCLUDE_FOLDER}/main.hpp
+			${INCLUDE_FOLDER}/Debug.hpp
 	        ${INCLUDE_FOLDER}/Matrix4.h
-	        ${INCLUDE_FOLDER}/Vecteur3D.h
 	        ${INCLUDE_FOLDER}/Quaternion.h)
 
 #Main exec

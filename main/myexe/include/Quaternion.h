@@ -36,8 +36,8 @@ public:
     Quaternion& operator*=(const Quaternion& p_quaternion);
     Quaternion operator*(const Quaternion& p_quaternion);
 
-	//Quaternion& operator*=(float const p_float);
- //   Quaternion operator*(float const p_float);
+	Quaternion& operator*=(float const p_float);
+    Quaternion operator*(float const p_float);
 
     Quaternion& operator+=(const Quaternion& p_quaternion);
     Quaternion operator+(const Quaternion& p_quaternion);
