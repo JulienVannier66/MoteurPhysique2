@@ -9,7 +9,8 @@ include_directories(${INCLUDE_FOLDER})
 #Source files
 set(SOURCES ${SOURCE_FOLDER}/main.cpp
 			${SOURCE_FOLDER}/Vecteur3D.cpp
-			${SOURCE_FOLDER}/Matrix3.cpp)
+			${SOURCE_FOLDER}/Matrix3.cpp
+			${SOURCE_FOLDER}/RigidBody.cpp)
 
 #Headers files (for IntelliSense)
 set(HEADERS ${INCLUDE_FOLDER}/main.hpp
@@ -18,7 +19,8 @@ set(HEADERS ${INCLUDE_FOLDER}/main.hpp
 			${INCLUDE_FOLDER}/Assert.hpp
 			${INCLUDE_FOLDER}/Debug.hpp
 			${INCLUDE_FOLDER}/Matrix3.hpp
-			${INCLUDE_FOLDER}/Test_Matrix3.hpp)
+			${INCLUDE_FOLDER}/Test_Matrix3.hpp
+			${INCLUDE_FOLDER}/RigidBody.hpp)
 
 #Main exec
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
