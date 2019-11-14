@@ -18,6 +18,7 @@ int main(void)
     testMatrix3.test_determinant();
     testMatrix3.test_inverse();
     std::cin.ignore();
+
     return 0;
 }
 /*

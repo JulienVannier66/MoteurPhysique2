@@ -205,6 +205,7 @@ public:
             SetConsoleTextAttribute(hConsole, 12);
             std::cerr << "transpose --- KO" << std::endl;
         }
+
     }
 
     void test_determinant()
