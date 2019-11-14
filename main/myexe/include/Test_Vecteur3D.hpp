@@ -68,6 +68,4 @@ public:
         {
             SetConsoleTextAttribute(hConsole, 12);
             std::cerr << "test_addition += --- KO" << std::endl;
-        }
-    }
 };
