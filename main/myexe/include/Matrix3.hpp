@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <Quaternion.h>
 
 class Matrix3
 {
@@ -128,7 +129,7 @@ public:
 
     float determinant();
    
-    //Matrix3 setOrientation(Quaternion p_quat);
+    static Matrix3 setOrientation(Quaternion p_quat);
 
     std::string print();
 };

@@ -175,11 +175,12 @@ public:
         try
         {
             Vecteur3D vec(4, -3, 2);
-            Matrix3 matrice_test_mult_vec(4.0f, 2.0f, -2.0f, 6.0f, 13.0f, -2.0f, 5.6f, 8.2f,7.1f);
+            Matrix3 matrice_test_mult_vec(4.0f, 2.0f, -2.0f, 6.0f, 13.0f, -2.0f, 5.6f, 8.2f, 7.1f);
             std::cout << "matrice" << matrice_test_mult_vec.print() << std::endl;
-            std::cout << "vec" <<  vec.print() << std::endl;
-            std::cout << "mult vec" << (matrice_test_mult_vec*vec).print() << std::endl;
-            Assert<Wrong>(!CHECK_WRONG || (matrice_test_mult_vec*vec).print() == "[6.000000;-19.000000;12.000001]");
+            std::cout << "vec" << vec.print() << std::endl;
+            std::cout << "mult vec" << (matrice_test_mult_vec * vec).print() << std::endl;
+            Assert<Wrong>(!CHECK_WRONG || (matrice_test_mult_vec * vec).print() ==
+                                              "[6.000000;-19.000000;12.000001]");
             SetConsoleTextAttribute(hConsole, 10);
             std::cout << "operateur *(Vecteur3D) --- OK" << std::endl;
         } catch (Wrong e)
@@ -205,7 +206,6 @@ public:
             SetConsoleTextAttribute(hConsole, 12);
             std::cerr << "transpose --- KO" << std::endl;
         }
-
     }
 
     void test_determinant()
@@ -236,8 +236,9 @@ public:
             double x4 = 7.0f / 59.0f;
             double x5 = -35.0f / 59.0f;
             double x6 = -8.0f / 59.0f;
-            Matrix3 matrice_temoin(0.0f, -1.0f, 0.0f, x1, x2, x3, x4, x5,x6);
-            Assert<Wrong>(!CHECK_WRONG || matrice_test_inverse.print().compare(matrice_temoin.print()) == 0);
+            Matrix3 matrice_temoin(0.0f, -1.0f, 0.0f, x1, x2, x3, x4, x5, x6);
+            Assert<Wrong>(!CHECK_WRONG ||
+                          matrice_test_inverse.print().compare(matrice_temoin.print()) == 0);
             SetConsoleTextAttribute(hConsole, 10);
             std::cout << "inverse --- OK" << std::endl;
         } catch (Wrong e)
@@ -246,4 +247,26 @@ public:
             std::cerr << "inverse --- KO" << std::endl;
         }
     }
-};
+
+    void test_setOrientation()
+    {
+        try
+        {
+            std::vector<float> vec;
+            vec.push_back(3);
+            vec.push_back(1);
+            vec.push_back(-1);
+            vec.push_back(-7);
+            Quaternion quat(vec);
+            Matrix3 matrice_test_setOrientation = Matrix3::setOrientation(quat);
+            Matrix3 matrice_temoin(-3, 20, 8, -8, -19, -44, -20, 40, -19);
+            Assert<Wrong>(!CHECK_WRONG || matrice_test_setOrientation.print().compare(matrice_temoin.print()) == 0);
+            SetConsoleTextAttribute(hConsole, 10);
+            std::cout << "setOrientation --- OK" << std::endl;
+        } catch (Wrong e)
+        {
+            SetConsoleTextAttribute(hConsole, 12);
+            std::cerr << "setOrientation --- KO" << std::endl;
+        }
+    }
+}; 

@@ -1,5 +1,5 @@
 #pragma once
-#include "Vecteur3D.h"
+#include <Vecteur3D.hpp>
 #include <vector>
 
 class Quaternion
@@ -13,6 +13,14 @@ public:
     // Default
     Quaternion(){};
 
+    // value
+    Quaternion(float x, float y, float z, float w)
+    {
+        m_data.push_back(x);
+        m_data.push_back(y);
+        m_data.push_back(z);
+        m_data.push_back(w);
+    }
     // Via vector
     Quaternion(std::vector<float> p_vector) { m_data = p_vector; }
     // Copie
@@ -36,7 +44,7 @@ public:
     Quaternion& operator*=(const Quaternion& p_quaternion);
     Quaternion operator*(const Quaternion& p_quaternion);
 
-	Quaternion& operator*=(float const p_float);
+    Quaternion& operator*=(float const p_float);
     Quaternion operator*(float const p_float);
 
     Quaternion& operator+=(const Quaternion& p_quaternion);

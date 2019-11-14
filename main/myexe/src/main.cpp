@@ -17,6 +17,7 @@ int main(void)
     testMatrix3.test_transpose();
     testMatrix3.test_determinant();
     testMatrix3.test_inverse();
+    testMatrix3.test_setOrientation();
     std::cin.ignore();
 
     return 0;
