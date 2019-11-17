@@ -1,4 +1,4 @@
-#include "Matrix4.h"
+#include "Matrix4.hpp"
 
 void Matrix4::setMatrix4(Matrix4& p_matrix4)
 {

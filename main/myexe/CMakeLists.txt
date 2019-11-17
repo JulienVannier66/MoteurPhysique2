@@ -23,7 +23,7 @@ set(HEADERS ${INCLUDE_FOLDER}/main.hpp
 			${INCLUDE_FOLDER}/Matrix3.hpp
 			${INCLUDE_FOLDER}/Test_Matrix3.hpp
 			${INCLUDE_FOLDER}/RigidBody.hpp
-	        ${INCLUDE_FOLDER}/Matrix4.h
-	        ${INCLUDE_FOLDER}/Quaternion.h)
+	        ${INCLUDE_FOLDER}/Matrix4.hpp
+	        ${INCLUDE_FOLDER}/Quaternion.hpp)
 #Main exec
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})

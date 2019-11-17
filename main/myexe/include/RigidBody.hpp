@@ -1,4 +1,5 @@
 #include <Vecteur3D.hpp>
+#include <Quaternion.hpp>
 
 class RigidBody
 {

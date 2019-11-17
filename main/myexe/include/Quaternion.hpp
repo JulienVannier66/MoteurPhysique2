@@ -1,5 +1,5 @@
 #pragma once
-#include "Vecteur3D.h"
+#include "Vecteur3D.hpp"
 #include <vector>
 
 class Quaternion
@@ -43,8 +43,11 @@ public:
     Quaternion operator+(const Quaternion& p_quaternion);
 
     // rotatebyVector
-    void faireRotation(Vecteur3D p_vecteur);
+    void faireRotation(Vecteur3D& p_vecteur);
 
     // UpdateAngularVelocity
-    void updateAngularVelocity(Vecteur3D p_vecteur, float p_temps);
+    void updateAngularVelocity(Vecteur3D& p_vecteur, float p_temps);
+
+	//Fonction print pour les tests
+    std::string print();
 };

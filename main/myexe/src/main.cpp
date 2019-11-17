@@ -1,22 +1,34 @@
 #pragma once
-#include <iostream>
-#include <Vecteur3D.hpp>
 #include <Matrix3.hpp>
-#include <Test_Matrix3.hpp>;
+#include <Vecteur3D.hpp>
+#include <iostream>
+//#include <Test_Matrix3.hpp>
+#include <Quaternion.hpp>
+#include <Test_Quaternion.hpp>
 
-//void testVecteur3D();
-//void testMatrix3();
+// Attention : include une seule classe de test à la fois
 
-int main(void)
+// void testVecteur3D();
+// void testMatrix3();
+
+int main()
 {
     // testVecteur3D();
     // testMatrix3();
-    Test_Matrix3 testMatrix3;
-    testMatrix3.test_creation();
-    testMatrix3.test_opération();
-    testMatrix3.test_transpose();
-    testMatrix3.test_determinant();
-    testMatrix3.test_inverse();
+
+    // Test_Matrix3 testMatrix3;
+    // testMatrix3.test_creation();
+    // testMatrix3.test_opération();
+    // testMatrix3.test_transpose();
+    // testMatrix3.test_determinant();
+    // testMatrix3.test_inverse();
+
+    Test_Quaternion testQuaternion;
+    testQuaternion.test_creation();
+    testQuaternion.test_normalize();
+    testQuaternion.test_faireRotation();
+    testQuaternion.test_updateAngularVelocity();
+
     std::cin.ignore();
 
     return 0;
