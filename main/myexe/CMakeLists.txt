@@ -19,3 +19,4 @@ set(HEADERS ${INCLUDE_FOLDER}/main.hpp
 
 #Main exec
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+target_link_libraries(${PROJECT_NAME} freeglut_static)
