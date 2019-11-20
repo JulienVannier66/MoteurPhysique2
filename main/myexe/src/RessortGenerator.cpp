@@ -1,6 +1,6 @@
 #include <RessortGenerator.hpp>
 
-void RessortGenerator::updateForce(Vecteur3D p_point, float duration)
+void RessortGenerator::updateForce()
 {
     m_point1.localToWorld(m_object.getTransformMatrice());
     m_point2.localToWorld(m_object.getTransformMatrice());
