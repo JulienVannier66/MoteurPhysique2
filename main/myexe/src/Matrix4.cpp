@@ -154,10 +154,8 @@ Matrix4 Matrix4::setOrientation(Quaternion p_quaternion, Vecteur3D p_position)
     float l_k = 1 - (2 * x * x + 2 * y * y);
     float l_l = p_position.getZ();
 
-    Matrix4 ret;
     std::vector<float> myvec{l_a, l_b, l_c, l_d, l_e, l_f, l_g, l_h, l_i, l_j, l_k, l_l};
-    ret = Matrix4(myvec);
-    return ret;
+    return Matrix4(myvec);
 }
 
 // Tourne l'objet d'orientation p_quaternion, et donc modifie p_quaternion

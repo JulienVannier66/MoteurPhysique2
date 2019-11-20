@@ -6,19 +6,19 @@ void Matrix3::setMatrixAt(int p_index, float p_value) { m_matrice[p_index] = p_v
 Matrix3 Matrix3::operator+(Matrix3 const& p_mat)
 {
     std::vector<float> l_temp_mat;
-    for (int i = 0; i < 9; i++) { l_temp_mat.push_back(m_matrice[i] + p_mat.m_matrice[i]); }
+    for (int i = 0; i < 9; i++) { l_temp_mat.push_back(m_matrice[i] + p_mat.m_matrice[i]); }  //pour chaque element de m_mat on lui ajoute l'élément correspondant de p_mat
     Matrix3 mat(l_temp_mat);
     return mat;
 }
 
 Matrix3& Matrix3::operator+=(Matrix3 const& p_mat)
 {
-    for (int i = 0; i < 9; i++) { m_matrice[i] += p_mat.m_matrice[i]; }
+    for (int i = 0; i < 9; i++) { m_matrice[i] += p_mat.m_matrice[i]; }  // //pour chaque element de m_mat on lui ajoute l'élément correspondant de p_matrice
     return *this;
 }
 
 Matrix3 Matrix3::operator*(Matrix3 const& p_mat)
-{
+{ /*on réalise un produit de matrice à la main*/
     std::vector<float> l_temp_mat;
     l_temp_mat.push_back(m_matrice[0] * p_mat.m_matrice[0] + m_matrice[1] * p_mat.m_matrice[3] +
                          m_matrice[2] * p_mat.m_matrice[6]);
@@ -43,6 +43,7 @@ Matrix3 Matrix3::operator*(Matrix3 const& p_mat)
 
 Matrix3& Matrix3::operator*=(Matrix3 const& p_mat)
 {
+    /*on réalise un produit de matrice à la main*/
     std::vector<float> l_temp_mat;
     l_temp_mat.push_back(m_matrice[0] * p_mat.m_matrice[0] + m_matrice[1] * p_mat.m_matrice[3] +
                          m_matrice[2] * p_mat.m_matrice[6]);
@@ -68,6 +69,7 @@ Matrix3& Matrix3::operator*=(Matrix3 const& p_mat)
 
 Matrix3& Matrix3::operator*=(float const& p_number)
 {
+    /*on multiplie chaque element de m_matrice par p_number*/
     m_matrice[0] *= p_number;
     m_matrice[1] *= p_number;
     m_matrice[2] *= p_number;
@@ -83,12 +85,7 @@ Matrix3& Matrix3::operator*=(float const& p_number)
 Vecteur3D Matrix3::operator*(Vecteur3D const& p_vec)
 {
     std::vector<float> l_temp_vec;
-    std::cout << "ligne 1 :  " << m_matrice[0] * p_vec.getX() << "  " << m_matrice[1] * p_vec.getY()
-              << "  " << m_matrice[2] * p_vec.getZ() << std::endl;
-    std::cout << "ligne 2 :  " << m_matrice[3] * p_vec.getX() << "  " << m_matrice[4] * p_vec.getY()
-              << "  " << m_matrice[5] * p_vec.getZ() << std::endl;
-    std::cout << "ligne 3 :  " << m_matrice[6] * p_vec.getX() << "  " << m_matrice[7] * p_vec.getY()
-              << "  " << m_matrice[8] * p_vec.getZ() << std::endl;
+    /*on réalise un produit Matrice * vecteur classique */
     return Vecteur3D(
         m_matrice[0] * p_vec.getX() + m_matrice[1] * p_vec.getY() + m_matrice[2] * p_vec.getZ(),
         m_matrice[3] * p_vec.getX() + m_matrice[4] * p_vec.getY() + m_matrice[5] * p_vec.getZ(),
@@ -97,6 +94,7 @@ Vecteur3D Matrix3::operator*(Vecteur3D const& p_vec)
 
 void Matrix3::transpose()
 {
+    /*on commence par stocker les éléments au dessus de la diagonal pour ensuite créer la transpose*/
     float temp1 = m_matrice[1];
     float temp2 = m_matrice[2];
     float temp3 = m_matrice[5];
@@ -109,7 +107,8 @@ void Matrix3::transpose()
 }
 
 void Matrix3::inverse()
-{
+{ 
+	/*on commence par calculer les terme de la transpose de la commatrice*/
     float l_terme0 = m_matrice[4] * m_matrice[8] - m_matrice[5] * m_matrice[7];
     float l_terme1 = m_matrice[2] * m_matrice[7] - m_matrice[1] * m_matrice[8];
     float l_terme2 = m_matrice[1] * m_matrice[5] - m_matrice[2] * m_matrice[4];
@@ -120,8 +119,10 @@ void Matrix3::inverse()
     float l_terme7 = m_matrice[1] * m_matrice[6] - m_matrice[0] * m_matrice[7];
     float l_terme8 = m_matrice[0] * m_matrice[4] - m_matrice[1] * m_matrice[3];
     float l_det = determinant();
+    /*on verifie que la matrice est inversible (ie det!=0) */
     if (l_det != 0)
     {
+        /*on fini l'inversion en multipliant la matrice lar l'inverse du determinant*/
         m_matrice[0] = l_terme0 / l_det;
         m_matrice[1] = l_terme1 / l_det;
         m_matrice[2] = l_terme2 / l_det;
@@ -138,6 +139,7 @@ void Matrix3::inverse()
 
 float Matrix3::determinant()
 {
+    /*formule de calcul du determinant d'une matrice 3x3*/
     float l_res =
         m_matrice[0] * m_matrice[4] * m_matrice[8] + m_matrice[3] * m_matrice[7] * m_matrice[2] +
         m_matrice[6] * m_matrice[1] * m_matrice[5] - m_matrice[2] * m_matrice[4] * m_matrice[6] -
@@ -147,11 +149,13 @@ float Matrix3::determinant()
 
 Matrix3 Matrix3::setOrientation(Quaternion p_quat)
 {
+    /*on recupere les valeurs du quaternion pour plus de lisibilite*/
     float x = p_quat.getAt(0);
     float y = p_quat.getAt(1);
     float z = p_quat.getAt(2);
     float w = p_quat.getAt(3);
 
+	/*on applique la formule*/
     float l_a = 1 - (2 * y * y + 2 * z * z);
     float l_b = 2 * x * y + 2 * z * w;
     float l_c = 2 * x * z - 2 * y * w;
@@ -173,7 +177,7 @@ std::string Matrix3::print()
     std::string str("");
     for (int i = 0; i < 9; i++)
     {
-        if (m_matrice[i] == 0.00000f)
+        if (m_matrice[i] == 0.00000f)  // on met 6 chiffres après la virgule car ce sont des float et représenté avec ces strings le degré de précision est de base de 6 chiffre après la virgule
         {
             str += std::to_string(0.000000);
             str += " ";

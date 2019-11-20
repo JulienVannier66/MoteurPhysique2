@@ -1,40 +1,114 @@
-#pragma once
-#include <Matrix3.hpp>
-#include <Test_Matrix3.hpp>
-#include <Vecteur3D.hpp>
+#include "../../../external/freeglut-3.2.0/include/GL/freeglut_std.h"
+#include <GravityGenerator.hpp>
+#include <RigidBody.hpp>
 #include <iostream>
-#include <Quaternion.hpp>
-//#include <Test_Quaternion.hpp>
-#include <Matrix4.hpp>
-//#include <Test_Matrix4.hpp>
 
-// Attention : include une seule classe de test à la fois
+void inputKeyBoard(unsigned char key, int x, int y);
+void renderScene(void);
 
-// void testVecteur3D();
-// void testMatrix3();
+RigidBody r1;
+GravityGenerator g;
 
-int main()
+float startFrame = 0;
+float endFrame = 0;
+float deltaFrame = 0;
+float i = 0;
+int nbFrames = 0;
+float lastTime = 0;
+
+void inputKeyBoard(unsigned char key, int x, int y) { std::cout << "t" << std::endl; }
+// Calculate FPS
+void calculFrame(int& nbFrames, float& lastTime)
 {
-    Test_Matrix3 testMatrix3;
-    testMatrix3.test_creation();
-    testMatrix3.test_opération();
-    testMatrix3.test_transpose();
-    testMatrix3.test_determinant();
-    testMatrix3.test_inverse();
-    testMatrix3.test_setOrientation();
+    double currentTime = glutGet(GLUT_ELAPSED_TIME);
+    nbFrames++;
+    if (currentTime - lastTime >= 1000)
+    {
+        // cout and reset timer
+        std::cout << "FPS : " << nbFrames << std::endl;
+        nbFrames = 0;
+        lastTime += 1000;
+    }
+}
 
-    /* Test_Quaternion testQuaternion;
-     testQuaternion.test_creation();
-     testQuaternion.test_normalize();
-     testQuaternion.test_faireRotation();
-     testQuaternion.test_updateAngularVelocity();*/
+void changeSize(int w, int h)
+{
 
-    //Test_Matrix4 testMatrix4;
-    //testMatrix4.test_creation();
-    ////testMatrix4.test_operation;
-    //testMatrix4.test_inverse();
-    ////testMatrix4.test_set_orientation;
-    //std::cin.ignore();
+    // Prevent a divide by zero, when window is too short
+    if (h == 0) { h = 1; }
 
-    return 0;
+    float ratio = w * 1.0 / h;
+
+    // Use the Projection Matrix
+    glMatrixMode(GL_PROJECTION);
+    // Reset Matrix
+    glLoadIdentity();
+    // Set the viewport to be the entire window
+    glViewport(0, 0, w, h);
+    // Set the correct perspective.
+    gluPerspective(45, ratio, 1, 100);
+    // Get Back to the Modelview
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void renderScene(void)
+{
+    calculFrame(nbFrames, lastTime);
+    startFrame = glutGet(GLUT_ELAPSED_TIME); // Get start time to calculate deltaFrame for a frame
+    r1.addForce(Vecteur3D(0.00, -0.003, 0));
+
+    r1.integrate(deltaFrame);
+    g.updateForce(r1, deltaFrame);
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+
+    glTranslatef(r1.getPosition().getX(), r1.getPosition().getY(), r1.getPosition().getZ());
+    std::cout << "x : " << r1.getPosition().getX() << std::endl;
+    std::cout << "y : " << r1.getPosition().getY() << std::endl;
+    glRotated(0.2 * i, r1.getRotation().getX(), r1.getRotation().getY(), r1.getRotation().getZ());
+
+    glBegin(GL_QUADS);
+    glVertex3f(-2, -2, 0.0);
+    glVertex3f(-2, 2, 0.0);
+    glVertex3f(2, 2, 0.0);
+    glVertex3f(2, -2, 0.0);
+    glEnd();
+
+
+    glPopMatrix();
+    glFlush();
+
+    glutPostRedisplay();
+    glutSwapBuffers();
+
+    i = glutGet(GLUT_ELAPSED_TIME);
+
+    endFrame = glutGet(GLUT_ELAPSED_TIME); // Get end time for deltaFrame
+    deltaFrame = endFrame - startFrame;
+}
+
+int main(int argc, char** argv)
+{
+    r1.setPosition(Vecteur3D(-60, -10, -50));
+    r1.setRotation(Vecteur3D(0, 0, 1));
+    r1.addForce(Vecteur3D(1.3, 1, 0));
+    r1.setMasse(20.0f);
+    // init GLUT and create window
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
+    glutInitWindowPosition(100, 100);
+    glutInitWindowSize(1000, 320);
+    glutCreateWindow("Moteur physique Particule");
+
+    // register callbacks
+    glutDisplayFunc(renderScene);
+    glutReshapeFunc(changeSize);
+    glutKeyboardFunc(inputKeyBoard);
+
+    // enter GLUT event processing loop
+    glutMainLoop();
+
+    return 1;
 }

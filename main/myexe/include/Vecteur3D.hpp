@@ -20,7 +20,7 @@ public:
 	// Constructeurs & Destructeur
     Vecteur3D() = default;
     Vecteur3D(float p_x, float p_y, float p_z) : m_x(p_x), m_y(p_y), m_z(p_z) {};
-    Vecteur3D(const Vecteur3D& p_vecteur) : m_x(p_vecteur.m_x), m_y(p_vecteur.m_x), m_z(p_vecteur.m_z) {};
+    Vecteur3D(const Vecteur3D& p_vecteur) : m_x(p_vecteur.m_x), m_y(p_vecteur.m_y), m_z(p_vecteur.m_z) {};
     ~Vecteur3D() = default;
 
     // Getters

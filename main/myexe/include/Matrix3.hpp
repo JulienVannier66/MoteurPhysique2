@@ -13,7 +13,7 @@ private:
                     0	1	2
                     3	4	5
                     6	7	8
-            */
+    */
 
 public:
     // Constructeurs et destructeurs
@@ -83,9 +83,10 @@ public:
     // getter
     std::vector<float> getMatrix() { return m_matrice; }
 
+	/*donne la valeur p_value à l'index voulue de la matrice*/
 	void setMatrixAt(int p_index, float p_value);
 
-
+	/* copie la matrice p_mat dans la matrice m_mat*/
     Matrix3& operator=(Matrix3 const& p_mat)
     {
         if (p_mat.m_matrice.size() == 9)
@@ -111,28 +112,33 @@ public:
     /* matrice+matrice */
     Matrix3 operator+(Matrix3 const& p_mat);
 
-    /* matrice+matrice */
+    /* matrice+matrice en modifiant m_matrice */
     Matrix3& operator+=(Matrix3 const& p_mat);
 
     /* matrice*matrice */
     Matrix3 operator*(Matrix3 const& p_mat);
 
-    /* matrice*matrice */
+    /* matrice*matrice en modifiant m_matrice*/
     Matrix3& operator*=(Matrix3 const& p_mat);
 
-    /*matrice*float*/
+    /*matrice*float en modifiant m_matrice*/
     Matrix3& operator*=(float const& p_number);
 
     /* matrice*vecteur */
     Vecteur3D operator*(Vecteur3D const& p_vec);
 
+	/*change m_matrice en sa transpose*/
     void transpose();
 
+	/*change m_matrice en son inverse*/
     void inverse();
 
+	/*clalcul le determinant de m_matrice*/
     float determinant();
    
+	/*passe le quaternion p_quat sous forme de matrice et la renvoie*/
     static Matrix3 setOrientation(Quaternion p_quat);
 
+	/*fonction affichant la matrice sous la forme d'une string afin de pouvoir la comparer à d'autre dans des tests unitaires*/
     std::string print();
 };

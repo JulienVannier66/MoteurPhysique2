@@ -14,8 +14,8 @@ Vecteur3D Vecteur3D::operator+(const Vecteur3D& p_vecteur)
 Vecteur3D& Vecteur3D::operator+=(const Vecteur3D& p_vecteur)
 {
     m_x += p_vecteur.m_x;
-    m_x += p_vecteur.m_x;
-    m_x += p_vecteur.m_x;
+    m_y += p_vecteur.m_y;
+    m_z += p_vecteur.m_z;
     return *this;
 }
 
