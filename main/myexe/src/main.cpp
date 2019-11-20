@@ -4,7 +4,9 @@
 #include <iostream>
 //#include <Test_Matrix3.hpp>
 #include <Quaternion.hpp>
-#include <Test_Quaternion.hpp>
+//#include <Test_Quaternion.hpp>
+#include <Matrix4.hpp>
+#include <Test_Matrix4.hpp>
 
 // Attention : include une seule classe de test à la fois
 
@@ -23,11 +25,17 @@ int main()
     // testMatrix3.test_determinant();
     // testMatrix3.test_inverse();
 
-    Test_Quaternion testQuaternion;
-    testQuaternion.test_creation();
-    testQuaternion.test_normalize();
-    testQuaternion.test_faireRotation();
-    testQuaternion.test_updateAngularVelocity();
+    /* Test_Quaternion testQuaternion;
+     testQuaternion.test_creation();
+     testQuaternion.test_normalize();
+     testQuaternion.test_faireRotation();
+     testQuaternion.test_updateAngularVelocity();*/
+
+    Test_Matrix4 testMatrix4;
+    testMatrix4.test_creation();
+    //testMatrix4.test_operation;
+    testMatrix4.test_inverse();
+    //testMatrix4.test_set_orientation;
 
     std::cin.ignore();
 

@@ -163,8 +163,24 @@ Matrix4 Matrix4::setOrientation(Quaternion p_quaternion)
 // Tourne l'objet d'orientation p_quaternion, et donc modifie p_quaternion
 void Matrix4::transformation(Quaternion p_quaternion) {
 
+	Matrix4 l_matrice_rotation = setOrientation(p_quaternion);
+
 }
 // transformation inverse
 void Matrix4::transformationInverse(Quaternion p_quaternion) {
 
+}
+
+std::string Matrix4::print()
+{
+    std::string str("");
+    if (!m_data.empty())
+    {
+        for (int i = 0; i < 12; i++)
+        {
+            str += std::to_string(m_data[i]);
+            str += " ";
+        }
+    }
+    return str;
 }
