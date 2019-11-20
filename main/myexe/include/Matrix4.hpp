@@ -112,7 +112,7 @@ public:
     Matrix4 getInverse();
 
     // Transforme un quaternion en matrice
-    static Matrix4 setOrientation(Quaternion p_quaternion);
+    static Matrix4 setOrientation(Quaternion p_quaternion,Vecteur3D p_position);
 
     // Ajouter  transformation et transformation inverse pour vecteurs directions (dans Matrix4)
     // Tourne l'objet d'orientation p_quaternion, et donc modifie p_quaternion

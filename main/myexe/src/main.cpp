@@ -4,9 +4,9 @@
 #include <Vecteur3D.hpp>
 #include <iostream>
 #include <Quaternion.hpp>
-#include <Test_Quaternion.hpp>
+//#include <Test_Quaternion.hpp>
 #include <Matrix4.hpp>
-#include <Test_Matrix4.hpp>
+//#include <Test_Matrix4.hpp>
 
 // Attention : include une seule classe de test à la fois
 
@@ -29,12 +29,12 @@ int main()
      testQuaternion.test_faireRotation();
      testQuaternion.test_updateAngularVelocity();*/
 
-    Test_Matrix4 testMatrix4;
-    testMatrix4.test_creation();
-    //testMatrix4.test_operation;
-    testMatrix4.test_inverse();
-    //testMatrix4.test_set_orientation;
-    std::cin.ignore();
+    //Test_Matrix4 testMatrix4;
+    //testMatrix4.test_creation();
+    ////testMatrix4.test_operation;
+    //testMatrix4.test_inverse();
+    ////testMatrix4.test_set_orientation;
+    //std::cin.ignore();
 
     return 0;
 }
