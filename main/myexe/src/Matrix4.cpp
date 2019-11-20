@@ -132,7 +132,7 @@ Matrix4 Matrix4::getInverse()
     return ret;
 }
 
-Matrix4 Matrix4::setOrientation(Quaternion p_quaternion)
+Matrix4 Matrix4::setOrientation(Quaternion p_quaternion, Vecteur3D p_position)
 {
     float w = p_quaternion.getAt(0);
     float x = p_quaternion.getAt(1);
@@ -142,17 +142,17 @@ Matrix4 Matrix4::setOrientation(Quaternion p_quaternion)
     float l_a = 1 - (2 * y * y + 2 * z * z);
     float l_b = 2 * x * y + 2 * z * w;
     float l_c = 2 * x * z - 2 * y * w;
-    float l_d = x;
+    float l_d = p_position.getX();
 
     float l_e = 2 * x * y - 2 * z * w;
     float l_f = 1 - (2 * x * x + 2 * z * z);
     float l_g = 2 * y * z + 2 * x * w;
-    float l_h = y;
+    float l_h = p_position.getY();
 
     float l_i = 2 * x * z + 2 * y * w;
     float l_j = 2 * y * z - 2 * x * w;
     float l_k = 1 - (2 * x * x + 2 * y * y);
-    float l_l = z;
+    float l_l = p_position.getZ();
 
     Matrix4 ret;
     std::vector<float> myvec{l_a, l_b, l_c, l_d, l_e, l_f, l_g, l_h, l_i, l_j, l_k, l_l};
@@ -163,7 +163,7 @@ Matrix4 Matrix4::setOrientation(Quaternion p_quaternion)
 // Tourne l'objet d'orientation p_quaternion, et donc modifie p_quaternion
 void Matrix4::transformation(Quaternion p_quaternion) {
 
-	Matrix4 l_matrice_rotation = setOrientation(p_quaternion);
+	//Matrix4 l_matrice_rotation = setOrientation(p_quaternion);
 
 }
 // transformation inverse
