@@ -2,7 +2,8 @@
 #include <cmath>
 #include <iostream>
 #include <string>
-#include <Matrix4.hpp>
+
+class Matrix4;
 
 /*
  Cette classe represente un vecteur contenant 3 coordonnees
@@ -49,5 +50,6 @@ public:
     std::string print();
 
 	void localToWorld(Matrix4 p_transformMatrix);
+
     void worldToLocal(Matrix4 p_transformMatrix);
 };
