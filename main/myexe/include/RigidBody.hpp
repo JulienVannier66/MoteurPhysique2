@@ -103,6 +103,7 @@ public:
     Vecteur3D getVelocite() { return m_velocite; }
     Vecteur3D getRotation() { return m_rotation; }
     Quaternion getOrientation() { return m_orientation; }
+    Matrix4 getTransformMatrice() { return m_transforme; }
 
 
 	/*Ajoute une force à l'accumulateur de force*/

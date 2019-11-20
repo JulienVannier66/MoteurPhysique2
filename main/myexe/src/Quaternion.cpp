@@ -185,17 +185,19 @@ void Quaternion::updateAngularVelocity(Vecteur3D& p_vecteur, float p_temps)
     l_vector.push_back(p_vecteur.getY());
     l_vector.push_back(p_vecteur.getZ());
 
+	//On cree le quaternion l_w
     Quaternion l_w = Quaternion(l_vector);
 
+	//On applique la formule du cours
     Quaternion l_produit;
     l_produit = *this * l_w;
-
     *this = *this + (l_produit * (p_temps / 2));
 }
 
 std::string Quaternion::print()
 {
     std::string str("");
+	//Si le quaternion n'est pas vide, on affiche chaque element suivi d'un espace
     if (!m_data.empty())
     {
         for (int i = 0; i < 4; i++)
