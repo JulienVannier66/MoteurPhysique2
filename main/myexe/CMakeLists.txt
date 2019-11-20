@@ -12,7 +12,8 @@ set(SOURCES ${SOURCE_FOLDER}/main.cpp
 			${SOURCE_FOLDER}/Matrix3.cpp
 			${SOURCE_FOLDER}/RigidBody.cpp
 	        ${SOURCE_FOLDER}/Matrix4.cpp
-			${SOURCE_FOLDER}/Quaternion.cpp)
+			${SOURCE_FOLDER}/Quaternion.cpp
+			${SOURCE_FOLDER}/RessortGenerator.cpp)
 
 #Headers files (for IntelliSense)
 set(HEADERS ${INCLUDE_FOLDER}/main.hpp
@@ -24,6 +25,7 @@ set(HEADERS ${INCLUDE_FOLDER}/main.hpp
 			${INCLUDE_FOLDER}/Test_Matrix3.hpp
 			${INCLUDE_FOLDER}/RigidBody.hpp
 	        ${INCLUDE_FOLDER}/Matrix4.hpp
-	        ${INCLUDE_FOLDER}/Quaternion.hpp)
+	        ${INCLUDE_FOLDER}/Quaternion.hpp
+			${INCLUDE_FOLDER}/RessortGenerator.hpp)
 #Main exec
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})

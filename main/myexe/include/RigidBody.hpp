@@ -110,7 +110,7 @@ public:
 
     void clearAccumulateurs();
 
-    void setInverseInertieTensorCube(float p_masse, float p_rayon);
+    void setInverseInertieTensorSphere(float p_masse, float p_rayon);
 
     void setInverseInertieTensorCube(float p_masse, float p_x, float p_y, float p_z);
 
