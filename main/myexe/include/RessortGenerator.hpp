@@ -7,14 +7,15 @@
 class RessortGenerator 
 {
 private:
-    Vecteur3D m_point;         // Point d'attache du ressort
+    Vecteur3D m_point1;         // Point d'attache du ressort au rigidbody
+    Vecteur3D m_point2;			// Point d'attache du ressort à l'ancre
     RigidBody m_object;			//objet auquel est attaché le ressort	
     float m_K = 0;                    // Constante propre au ressort
     float m_Lo = 1;                   // Longueur du ressort au repos
 
 public:
     // Constructeurs & Destructeur
-    RessortGenerator():m_point(1,1,1) {}
+    RessortGenerator():{}
     RessortGenerator(Vecteur3D p_point, RigidBody p_object,const float& p_K, const float& p_Lo)
         : m_point(p_point),m_object(p_object), m_K(p_K), m_Lo(p_Lo)
     {}
@@ -35,5 +36,5 @@ public:
     void setLo(float p_Lo) {m_Lo = p_Lo; }
     void setObject(RigidBody p_object) { m_object = p_object; }
 
-    void updateForce(Vecteur3D p_point, float duration); // Ajout de la force generee par le ressort a la particule
+    void updateForce(); // Ajout de la force generee par le ressort a la particule
 };

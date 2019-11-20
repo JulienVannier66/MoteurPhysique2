@@ -104,20 +104,28 @@ public:
     Vecteur3D getRotation() { return m_rotation; }
     Quaternion getOrientation() { return m_orientation; }
 
+
+	/*Ajoute une force à l'accumulateur de force*/
     void addForce(Vecteur3D p_force);
 
+	/*Ajoute une couple à l'accumulateur de couple*/
     void addTorque(Vecteur3D p_torque);
 
+	/*vide les deux accumulateurs*/
     void clearAccumulateurs();
 
+	/*definit la matrice d'inertie inverse comme etant celle d'une sphère avec les formules défini*/
     void setInverseInertieTensorSphere(float p_masse, float p_rayon);
 
+	/*definit la matrice d'inertie inverse comme etant celle d'un parallelepipede rectangle avec les formules défini*/
     void setInverseInertieTensorCube(float p_masse, float p_x, float p_y, float p_z);
 
     /*actiualise la matrice transforme*/
     void calculDonneesDerivees();
 
+	/*applique un force p_force en un poin p_point du rigidbody avec p_point et p_force dans le repere monde*/
     void addForceAtPoint(Vecteur3D p_force, Vecteur3D p_point);
 
+		/*applique un force p_force en un poin p_point du rigidbody avec  p_force dans le repere monde et p_point dans le repere objet*/
     void addForceAtBodyPoint(Vecteur3D p_force, Vecteur3D p_point);
 };

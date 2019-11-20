@@ -22,6 +22,7 @@ void RigidBody::calculDonneesDerivees()
 
 void RigidBody::setInverseInertieTensorSphere(float p_masse, float p_rayon)
 {
+    /*on applique la formule connu pour un tenseur de sphere*/
     m_inverseInertiatensor = Matrix3();
 	m_inverseInertiatensor *= (2 / 5 * p_masse * p_rayon * p_rayon);
     m_inverseInertiatensor.inverse();
@@ -29,6 +30,7 @@ void RigidBody::setInverseInertieTensorSphere(float p_masse, float p_rayon)
 
 void RigidBody::setInverseInertieTensorCube(float p_masse, float p_x, float p_y, float p_z)
 {
+    /*on applique la formule connu pour un tenseur de parallelepipede rectangle*/
     m_inverseInertiatensor.setMatrixAt(0, 1 / 12 * p_masse * (p_y * p_y + p_z * p_z));
     m_inverseInertiatensor.setMatrixAt(4, 1 / 12 * p_masse * (p_x * p_x + p_z * p_z));
     m_inverseInertiatensor.setMatrixAt(8, 1 / 12 * p_masse * (p_y * p_y + p_x * p_x));

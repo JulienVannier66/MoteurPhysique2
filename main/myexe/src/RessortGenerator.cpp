@@ -2,6 +2,8 @@
 
 void RessortGenerator::updateForce(Vecteur3D p_point, float duration)
 {
-    Vecteur3D delta = p_point - m_point;
-    m_object.addForceAtBodyPoint(p_point,delta.normalise() * (delta.norme() - m_Lo) * -m_K);   //je ne sais pas si il ne faut pas utiliser la fonction AddForceAtPoint plutot que celle-ci
+    m_point1.localToWorld(m_object.getTransformMatrice());
+    m_point2.localToWorld(m_object.getTransformMatrice());
+    Vecteur3D delta = m_point1 - m_point2;
+    m_object.addForceAtPoint(m_point1,delta.normalise() * (delta.norme() - m_Lo) * -m_K);   //je ne sais pas si il ne faut pas utiliser la fonction AddForceAtPoint plutot que celle-ci
 }

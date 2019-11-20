@@ -2,11 +2,12 @@
 #include "RigidBody.hpp"
 #include "Vecteur3D.hpp"
 
+/*Classe servant à générer la force de gravité*/
+
 class GravityGenerator
 {
 private:
     Vecteur3D gravity = Vecteur3D(0, -9.81, 0); // Vecteur gravite
-    int count = 0;
 
 public:
     // Constructeurs & Destructeur
@@ -21,6 +22,5 @@ public:
     // Setters
     void setGravity(Vecteur3D gravity) { this->gravity = gravity; }
 
-    void updateForce(RigidBody p_rigidbody,
-                     float duration); // Ajoute la force a la particule renseignee
+    void updateForce(RigidBody p_rigidbody,float duration); // Ajoute la force a la particule renseignee
 };
