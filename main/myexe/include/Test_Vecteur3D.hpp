@@ -1,8 +1,9 @@
+#pragma once
 #include <Assert.hpp>
 #include <Debug.hpp>
 #include <Vecteur3D.hpp>
 #include <iostream>
-#include <windows.h> 
+#include <windows.h>
 
 class Test_Vecteur3D
 {
@@ -20,12 +21,12 @@ public:
     {
         try
         {
-            Assert<Wrong>(!CHECK_WRONG || 1==1); //
-            SetConsoleTextAttribute(hConsole, 10); //
+            Assert<Wrong>(!CHECK_WRONG || 1 == 1);                     //
+            SetConsoleTextAttribute(hConsole, 10);                     //
             std::cout << "test_creationVecteur3D --- OK" << std::endl; //
-        } catch (Wrong e) //
+        } catch (Wrong e)                                              //
         {
-            SetConsoleTextAttribute(hConsole, 12); //
+            SetConsoleTextAttribute(hConsole, 12);                     //
             std::cerr << "test_creationVecteur3D --- KO" << std::endl; //
         }
     }
@@ -39,7 +40,7 @@ public:
             Vecteur3D p_vecteurResult;
             std::string l_result;
 
-			p_vecteurResult = p_vecteur + p_vecteur2;
+            p_vecteurResult = p_vecteur + p_vecteur2;
             l_result = p_vecteurResult.print();
             Assert<Wrong>(!CHECK_WRONG || l_result == "[10;10;10]");
             SetConsoleTextAttribute(hConsole, 10);
@@ -51,7 +52,7 @@ public:
         }
     }
 
-	void test_additionVecteurCourant()
+    void test_additionVecteurCourant()
     {
         try
         {
