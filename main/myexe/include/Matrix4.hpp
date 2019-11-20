@@ -121,8 +121,4 @@ public:
     void transformationInverse(Quaternion p_quaternion);
 
     std::string print();
-
-     //void localToWorld(Vecteur3D p_vector);
-
-     //void worldToLocal(Vecteur3D p_vector);
 };

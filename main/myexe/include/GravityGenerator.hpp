@@ -1,6 +1,4 @@
 #pragma once
-#include "Particule.h"
-#include "ParticuleForceGenerator.h"
 #include "Vecteur3D.h"
 
 class GravityForceGenerator
