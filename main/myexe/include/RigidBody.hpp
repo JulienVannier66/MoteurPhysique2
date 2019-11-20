@@ -117,6 +117,8 @@ public:
     /*actiualise la matrice transforme*/
     void calculDonneesDerivees();
 
+	void integrate(float p_duration);
+
     void addForceAtPoint(Vecteur3D p_force, Vecteur3D p_point);
 
     void addForceAtBodyPoint(Vecteur3D p_force, Vecteur3D p_point);
