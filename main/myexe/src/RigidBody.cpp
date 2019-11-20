@@ -20,7 +20,7 @@ void RigidBody::calculDonneesDerivees()
     m_transforme = Matrix4::setOrientation(m_orientation, m_position);
 }
 
-void RigidBody::setInverseInertieTensorCube(float p_masse, float p_rayon)
+void RigidBody::setInverseInertieTensorSphere(float p_masse, float p_rayon)
 {
     m_inverseInertiatensor = Matrix3();
 	m_inverseInertiatensor *= (2 / 5 * p_masse * p_rayon * p_rayon);
