@@ -37,7 +37,7 @@ void RigidBody::setInverseInertieTensorCube(float p_masse, float p_x, float p_y,
 
 void RigidBody::addForceAtPoint(Vecteur3D p_force, Vecteur3D p_point)
 {
-    // faire le changement de referentiel
+    p_point.worldToLocal(m_transforme);
 
     addForce(p_force);
     addTorque(p_point ^ p_force);
@@ -45,7 +45,6 @@ void RigidBody::addForceAtPoint(Vecteur3D p_force, Vecteur3D p_point)
 
 void RigidBody::addForceAtBodyPoint(Vecteur3D p_force, Vecteur3D p_point)
 {
-    // faire le changement de referentiel
-
+    p_point.localToWorld(m_transforme);
     addForceAtPoint(p_force, p_point);
 }

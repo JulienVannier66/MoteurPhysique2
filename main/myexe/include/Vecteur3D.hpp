@@ -1,7 +1,10 @@
 #pragma once
+
 #include <cmath>
 #include <iostream>
 #include <string>
+
+class Matrix4;
 
 /*
  Cette classe represente un vecteur contenant 3 coordonnees
@@ -46,4 +49,7 @@ public:
 
     friend std::ostream& operator<<(std::ostream& p_out, const Vecteur3D& p_vecteur); // Affichage par le flux
     std::string print();
+
+	void localToWorld(Matrix4 p_transformMatrix);
+    void worldToLocal(Matrix4 p_transformMatrix);
 };

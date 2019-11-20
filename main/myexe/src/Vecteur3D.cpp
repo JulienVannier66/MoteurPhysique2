@@ -1,5 +1,6 @@
 #pragma once
 #include "Vecteur3D.hpp"
+#include <Matrix4.hpp>
 
 Vecteur3D Vecteur3D::operator+(const Vecteur3D& p_vecteur)
 {
@@ -81,22 +82,14 @@ Vecteur3D Vecteur3D::produitComposante(const Vecteur3D& p_vecteur)
     return l_result;
 }
 
-
 float Vecteur3D::produitScalaire(Vecteur3D& p_vecteur)
 {
     return m_x * p_vecteur.m_x + m_y * p_vecteur.m_y + m_z * p_vecteur.m_z;
 }
 
+float Vecteur3D::norme() { return sqrt(produitScalaire(*this)); }
 
-float Vecteur3D::norme()
-{
-	return sqrt(produitScalaire(*this));
-}
-
-float Vecteur3D::normeCarre()
-{
-	return pow(norme(), 2);
-}
+float Vecteur3D::normeCarre() { return pow(norme(), 2); }
 
 std::ostream& operator<<(std::ostream& p_out, const Vecteur3D& p_vecteur)
 {
@@ -110,7 +103,19 @@ Vecteur3D Vecteur3D::normalise()
                              : Vecteur3D(m_x / l_longueur, m_y / l_longueur, m_z / l_longueur);
 }
 
-std::string Vecteur3D::print() {
-    std::string result("[" + std::to_string(m_x) + ";" + std::to_string(m_y) + ";" + std::to_string(m_z) + "]");
+std::string Vecteur3D::print()
+{
+    std::string result("[" + std::to_string(m_x) + ";" + std::to_string(m_y) + ";" +
+                       std::to_string(m_z) + "]");
     return result;
 }
+
+void Vecteur3D::localToWorld(Matrix4 p_transformMatrix) {
+	*this = p_transformMatrix * *this; 
+}
+
+void Vecteur3D::worldToLocal(Matrix4 p_transformMatrix) { 
+	*this = p_transformMatrix.getInverse() * *this; 
+}
+
+

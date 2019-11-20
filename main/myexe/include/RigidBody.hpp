@@ -1,6 +1,6 @@
 #include <Matrix3.hpp>
-#include <Matrix4.h>
-#include <Quaternion.h>
+#include <Matrix4.hpp>
+#include <Quaternion.hpp>
 #include <Vecteur3D.hpp>
 
 class RigidBody

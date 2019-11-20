@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <Quaternion.h>
+#include <Quaternion.hpp>
 
 class Matrix3
 {

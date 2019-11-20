@@ -1,4 +1,4 @@
-#include "Matrix4.h"
+#include "Matrix4.hpp"
 
 void Matrix4::setMatrix4(Matrix4& p_matrix4)
 {
@@ -141,7 +141,7 @@ Matrix4 Matrix4::setOrientation(Quaternion p_quaternion)
 
     float l_a = 1 - (2 * y * y + 2 * z * z);
     float l_b = 2 * x * y + 2 * z * w;
-    float l_c = 2 * x * y - 2 * y * w;
+    float l_c = 2 * x * z - 2 * y * w;
     float l_d = x;
 
     float l_e = 2 * x * y - 2 * z * w;
@@ -163,8 +163,24 @@ Matrix4 Matrix4::setOrientation(Quaternion p_quaternion)
 // Tourne l'objet d'orientation p_quaternion, et donc modifie p_quaternion
 void Matrix4::transformation(Quaternion p_quaternion) {
 
+	Matrix4 l_matrice_rotation = setOrientation(p_quaternion);
+
 }
 // transformation inverse
 void Matrix4::transformationInverse(Quaternion p_quaternion) {
 
+}
+
+std::string Matrix4::print()
+{
+    std::string str("");
+    if (!m_data.empty())
+    {
+        for (int i = 0; i < 12; i++)
+        {
+            str += std::to_string(m_data[i]);
+            str += " ";
+        }
+    }
+    return str;
 }
