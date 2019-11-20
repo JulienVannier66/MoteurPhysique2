@@ -1,7 +1,8 @@
 #pragma once
-#include "Vecteur3D.h"
+#include "RigidBody.hpp"
+#include "Vecteur3D.hpp"
 
-class GravityForceGenerator
+class GravityGenerator
 {
 private:
     Vecteur3D gravity = Vecteur3D(0, -9.81, 0); // Vecteur gravite
@@ -9,11 +10,10 @@ private:
 
 public:
     // Constructeurs & Destructeur
-    GravityForceGenerator() {}
-    GravityForceGenerator(Vecteur3D gravity) { this->gravity = gravity; }
-    GravityForceGenerator(const GravityForceGenerator& gravityForceGenerator)
-        : gravity(gravityForceGenerator.gravity){};
-    ~GravityForceGenerator() {}
+    GravityGenerator() {}
+    GravityGenerator(Vecteur3D gravity) { this->gravity = gravity; }
+    GravityGenerator(const GravityGenerator& gravityGenerator) : gravity(gravityGenerator.gravity){};
+    ~GravityGenerator() {}
 
     // Getters
     Vecteur3D getGravity() { return gravity; }
@@ -21,6 +21,6 @@ public:
     // Setters
     void setGravity(Vecteur3D gravity) { this->gravity = gravity; }
 
-    void updateForce(Particule* particule,
+    void updateForce(RigidBody p_rigidbody,
                      float duration); // Ajoute la force a la particule renseignee
 };
