@@ -141,7 +141,7 @@ Matrix4 Matrix4::setOrientation(Quaternion p_quaternion)
 
     float l_a = 1 - (2 * y * y + 2 * z * z);
     float l_b = 2 * x * y + 2 * z * w;
-    float l_c = 2 * x * y - 2 * y * w;
+    float l_c = 2 * x * z - 2 * y * w;
     float l_d = x;
 
     float l_e = 2 * x * y - 2 * z * w;
