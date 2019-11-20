@@ -23,7 +23,7 @@ void RigidBody::calculDonneesDerivees()
 void RigidBody::integrate(float p_duration)
 {
     Vecteur3D l_linearAcceleration = m_forceAccum * m_inverseMass;							// Calcul de l'acceleration lineaire
-    Vecteur3D l_angularAcceleration = m_torqueAccum * m_inverseInertiatensor;				// Calcul de l'acceleration angulaire
+    Vecteur3D l_angularAcceleration = m_inverseInertiatensor * m_torqueAccum;				// Calcul de l'acceleration angulaire
     m_velocite = m_velocite * pow(m_linearDumping, p_duration) + l_linearAcceleration;		// Update velocite lineaire
     m_rotation = m_rotation * pow(m_angularDumping, p_duration) + l_angularAcceleration;	// Update velocite angulaire
 
@@ -33,7 +33,7 @@ void RigidBody::integrate(float p_duration)
     clearAccumulateurs();																	// Vidage des accumulateurs
 }
 
-void RigidBody::setInverseInertieTensorCube(float p_masse, float p_rayon)
+void RigidBody::setInverseInertieTensorSphere(float p_masse, float p_rayon)
 {
     /*on applique la formule connu pour un tenseur de sphere*/
     m_inverseInertiatensor = Matrix3();

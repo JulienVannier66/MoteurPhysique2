@@ -1,3 +1,4 @@
+#pragma once
 #include <Matrix3.hpp>
 #include <Matrix4.hpp>
 #include <Quaternion.hpp>
@@ -115,7 +116,7 @@ public:
 	/*vide les deux accumulateurs*/
     void clearAccumulateurs();
 
-	/*definit la matrice d'inertie inverse comme etant celle d'une sph�re avec les formules d�fini*/
+	/*definit la matrice d'inertie inverse comme etant celle d'une sphere avec les formules d�fini*/
     void setInverseInertieTensorSphere(float p_masse, float p_rayon);
 
 	/*definit la matrice d'inertie inverse comme etant celle d'un parallelepipede rectangle avec les formules d�fini*/
