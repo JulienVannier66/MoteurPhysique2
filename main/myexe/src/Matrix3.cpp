@@ -1,6 +1,8 @@
 #pragma once
 #include <Matrix3.hpp>
 
+void Matrix3::setMatrixAt(int p_index, float p_value) { m_matrice[p_index] = p_value; }
+
 Matrix3 Matrix3::operator+(Matrix3 const& p_mat)
 {
     std::vector<float> l_temp_mat;
@@ -143,7 +145,7 @@ float Matrix3::determinant()
     return l_res;
 }
 
- Matrix3 Matrix3::setOrientation(Quaternion p_quat)
+Matrix3 Matrix3::setOrientation(Quaternion p_quat)
 {
     float x = p_quat.getAt(0);
     float y = p_quat.getAt(1);

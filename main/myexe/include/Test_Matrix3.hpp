@@ -230,12 +230,12 @@ public:
         {
             Matrix3 matrice_test_inverse(3, -8, 5, -1, 0, 0, 7, -7, -3);
             matrice_test_inverse.inverse();
-            double x1 = -3.0f / 59.0f;
-            double x2 = -44.0f / 59.0f;
-            double x3 = -5.0f / 59.0f;
-            double x4 = 7.0f / 59.0f;
-            double x5 = -35.0f / 59.0f;
-            double x6 = -8.0f / 59.0f;
+            float x1 = -3.0f / 59.0f;
+            float x2 = -44.0f / 59.0f;
+            float x3 = -5.0f / 59.0f;
+            float x4 = 7.0f / 59.0f;
+            float x5 = -35.0f / 59.0f;
+            float x6 = -8.0f / 59.0f;
             Matrix3 matrice_temoin(0.0f, -1.0f, 0.0f, x1, x2, x3, x4, x5, x6);
             Assert<Wrong>(!CHECK_WRONG ||
                           matrice_test_inverse.print().compare(matrice_temoin.print()) == 0);

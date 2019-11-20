@@ -2,7 +2,7 @@
 #include <iostream>
 #include <Vecteur3D.hpp>
 #include <Matrix3.hpp>
-#include <Test_Matrix3.hpp>;
+#include <Test_Matrix3.hpp>
 
 //void testVecteur3D();
 //void testMatrix3();
