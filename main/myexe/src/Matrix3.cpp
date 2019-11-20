@@ -1,6 +1,8 @@
 #pragma once
 #include <Matrix3.hpp>
 
+void Matrix3::setMatrixAt(int p_index, float p_value) { m_matrice[p_index] = p_value; }
+
 Matrix3 Matrix3::operator+(Matrix3 const& p_mat)
 {
     std::vector<float> l_temp_mat;
@@ -143,29 +145,28 @@ float Matrix3::determinant()
     return l_res;
 }
 
-// Matrix3 Matrix3::setOrientation(Quaternion p_quat)
-//{
-//    float w = p_quat.at(0);
-//    float x = p_quat.at(1);
-//    float y = p_quat.at(2);
-//    float z = p_quat.at(3);
-//
-//    float l_a = 1 - (2 * y * y + 2 * z * z);
-//    float l_b = 2 * x * y + 2 * z * w;
-//    float l_c = 2 * x * y - 2 * y * w;
-//
-//    float l_e = 2 * x * y - 2 * z * w;
-//    float l_f = 1 - (2 * x * x + 2 * z * z);
-//    float l_g = 2 * y * z + 2 * x * w;
-//
-//    float l_i = 2 * x * z + 2 * y * w;
-//    float l_j = 2 * y * z - 2 * x * w;
-//    float l_k = 1 - (2 * x * x + 2 * y * y);
-//
-//    Matrix3 ret;
-//    std::vector<float> myvec{l_a, l_b, l_c, l_e, l_f, l_g, l_i, l_j, l_k};
-//    return Matrix3(myvec);
-//}
+Matrix3 Matrix3::setOrientation(Quaternion p_quat)
+{
+    float x = p_quat.getAt(0);
+    float y = p_quat.getAt(1);
+    float z = p_quat.getAt(2);
+    float w = p_quat.getAt(3);
+
+    float l_a = 1 - (2 * y * y + 2 * z * z);
+    float l_b = 2 * x * y + 2 * z * w;
+    float l_c = 2 * x * z - 2 * y * w;
+
+    float l_e = 2 * x * y - 2 * z * w;
+    float l_f = 1 - (2 * x * x + 2 * z * z);
+    float l_g = 2 * y * z + 2 * x * w;
+
+    float l_i = 2 * x * z + 2 * y * w;
+    float l_j = 2 * y * z - 2 * x * w;
+    float l_k = 1 - (2 * x * x + 2 * y * y);
+
+    std::vector<float> myvec{l_a, l_b, l_c, l_e, l_f, l_g, l_i, l_j, l_k};
+    return Matrix3(myvec);
+}
 
 std::string Matrix3::print()
 {

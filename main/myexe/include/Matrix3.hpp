@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <Quaternion.hpp>
 
 class Matrix3
 {
@@ -82,6 +83,9 @@ public:
     // getter
     std::vector<float> getMatrix() { return m_matrice; }
 
+	void setMatrixAt(int p_index, float p_value);
+
+
     Matrix3& operator=(Matrix3 const& p_mat)
     {
         if (p_mat.m_matrice.size() == 9)
@@ -128,7 +132,7 @@ public:
 
     float determinant();
    
-    //Matrix3 setOrientation(Quaternion p_quat);
+    static Matrix3 setOrientation(Quaternion p_quat);
 
     std::string print();
 };

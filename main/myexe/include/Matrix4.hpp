@@ -1,6 +1,6 @@
 ﻿#pragma once
-#include "Quaternion.hpp"
-#include "Vecteur3D.hpp"
+#include <Quaternion.hpp>
+#include <Vecteur3D.hpp>
 #include <iostream>
 #include <vector>
 
