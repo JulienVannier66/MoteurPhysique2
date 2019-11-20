@@ -2,18 +2,8 @@
 
 void Matrix4::setMatrix4(Matrix4& p_matrix4)
 {
-    m_data.at(0) = p_matrix4.m_data.at(0);
-    m_data.at(1) = p_matrix4.m_data.at(1);
-    m_data.at(2) = p_matrix4.m_data.at(2);
-    m_data.at(3) = p_matrix4.m_data.at(3);
-    m_data.at(4) = p_matrix4.m_data.at(4);
-    m_data.at(5) = p_matrix4.m_data.at(5);
-    m_data.at(6) = p_matrix4.m_data.at(6);
-    m_data.at(7) = p_matrix4.m_data.at(7);
-    m_data.at(8) = p_matrix4.m_data.at(8);
-    m_data.at(9) = p_matrix4.m_data.at(9);
-    m_data.at(10) = p_matrix4.m_data.at(10);
-    m_data.at(11) = p_matrix4.m_data.at(11);
+    // On modifie chaque valeur une par une
+    for (int i = 0; i < 12; i++) { m_data.at(i) = p_matrix4.m_data.at(i); }
 }
 
 void Matrix4::setValueAt(float p_value, int p_index) { m_data.at(p_index) = p_value; }
@@ -34,10 +24,14 @@ float Matrix4::get(int p_i)
 
 Vecteur3D Matrix4::operator*(const Vecteur3D p_vector)
 {
+
+	//On recupere les valeurs du vecteur pour plus de lisbilite
     float x = p_vector.getX();
     float y = p_vector.getY();
     float z = p_vector.getZ();
 
+
+	//On applique la formule du cours
     float l_a = m_data.at(0) * x + m_data.at(1) * y + m_data.at(2) * z + m_data.at(4);
     float l_b = m_data.at(4) * x + m_data.at(5) * y + m_data.at(6) * z + m_data.at(7);
     float l_c = m_data.at(8) * x + m_data.at(9) * y + m_data.at(10) * z + m_data.at(11);
@@ -48,7 +42,7 @@ Vecteur3D Matrix4::operator*(const Vecteur3D p_vector)
 
 Matrix4 Matrix4::operator*(const Matrix4 p_matrix4)
 {
-
+	//On applique la formule du cours
     float l_a = m_data.at(0) * p_matrix4.m_data.at(0) + m_data.at(1) * p_matrix4.m_data.at(4) +
                 m_data.at(2) * p_matrix4.m_data.at(8);
     float l_b = m_data.at(0) * p_matrix4.m_data.at(1) + m_data.at(1) * p_matrix4.m_data.at(5) +
@@ -84,7 +78,8 @@ Matrix4 Matrix4::operator*(const Matrix4 p_matrix4)
 
 Matrix4 Matrix4::getInverse()
 {
-
+	//On applique la formule du cours pour le calcule d'une matrice inverse
+	//On calcule d'abord le déterminant
     float det =
         m_data.at(8) * m_data.at(5) * m_data.at(2) + m_data.at(4) * m_data.at(9) * m_data.at(2) +
         m_data.at(8) * m_data.at(1) * m_data.at(6) - m_data.at(0) * m_data.at(9) * m_data.at(6) -
@@ -134,10 +129,15 @@ Matrix4 Matrix4::getInverse()
 
 Matrix4 Matrix4::setOrientation(Quaternion p_quaternion, Vecteur3D p_position)
 {
+
+	//On recupere les valeurs du quaternion pour plus de lisibilite
     float w = p_quaternion.getAt(0);
     float x = p_quaternion.getAt(1);
     float y = p_quaternion.getAt(2);
     float z = p_quaternion.getAt(3);
+
+	//On applique la formule du cours pour la conversion quaternion->matrice
+    // La dernière colonne correspond a la position de l'objet
 
     float l_a = 1 - (2 * y * y + 2 * z * z);
     float l_b = 2 * x * y + 2 * z * w;
@@ -161,19 +161,18 @@ Matrix4 Matrix4::setOrientation(Quaternion p_quaternion, Vecteur3D p_position)
 }
 
 // Tourne l'objet d'orientation p_quaternion, et donc modifie p_quaternion
-void Matrix4::transformation(Quaternion p_quaternion) {
-
-	//Matrix4 l_matrice_rotation = setOrientation(p_quaternion);
-
+void Matrix4::transformation(Quaternion p_quaternion)
+{
+    // Matrix4 l_matrice_rotation = setOrientation(p_quaternion);
 }
+
 // transformation inverse
-void Matrix4::transformationInverse(Quaternion p_quaternion) {
-
-}
+void Matrix4::transformationInverse(Quaternion p_quaternion) {}
 
 std::string Matrix4::print()
 {
     std::string str("");
+	//Si le quaternion n'est pas vide, on affiche chaque valeur suivi d'un espace
     if (!m_data.empty())
     {
         for (int i = 0; i < 12; i++)

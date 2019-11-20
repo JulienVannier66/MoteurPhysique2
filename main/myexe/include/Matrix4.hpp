@@ -4,9 +4,11 @@
 #include <iostream>
 #include <vector>
 
+//Classe decrivant les matrices 3x4
 class Matrix4
 {
 private:
+	//On stockera les 12 floats dans u std::vector
     std::vector<float> m_data;
 
 public:
@@ -19,6 +21,7 @@ public:
     Matrix4(float a, float b, float c, float d, float e, float f, float g, float h, float i,
             float j, float k, float l)
     {
+		//std::vector.push_back(x) ajoute x a la fin du vecteur 
         m_data.push_back(a);
         m_data.push_back(b);
         m_data.push_back(c);
@@ -33,23 +36,32 @@ public:
         m_data.push_back(l);
     }
 
-    // Constructeur via un tableau
+    // Constructeur via un std::vector
     Matrix4(std::vector<float> p_data) { m_data = p_data; };
 
-    // Constructeur de copie
+    // Constructeur de copie (a partir d'une autre matrice 3x4)
     Matrix4(Matrix4& p_matrix4) { m_data = p_matrix4.getAll(); };
 
     // Destructor
     ~Matrix4(){};
 
     // Getteurs
+
+	//Recupere l'ensemble des elements de la matrice sous forme de std::vector
     std::vector<float> getAll();
+
+	//Recupere l'element de la matrice d'index p_i
     float get(int p_i);
 
     // Setteurs
+
+	//Modifie l'ensemble de la matrice
     void setMatrix4(Matrix4& p_matrix4);
+
+	//Modifie la valeur d'index p_index par la valeur p_value
     void setValueAt(float p_value, int p_index);
 
+	//Surcharge d'operateur d'egalite
     Matrix4& operator=(Matrix4 const& p_mat)
     {
         if (p_mat.m_data.size() == 12)
@@ -78,9 +90,10 @@ public:
     // Produit avec un vecteur
     Vecteur3D operator*(const Vecteur3D p_vector);
 
-    // Surcharge operateur
+    // Surcharge operateur (matrice * matrice)
     Matrix4 operator*(const Matrix4 p_matrix4);
-
+	
+	//Surcharge operateur (matrice * float)
     Matrix4 operator*(const float p_float)
     {
 
@@ -114,11 +127,12 @@ public:
     // Transforme un quaternion en matrice
     static Matrix4 setOrientation(Quaternion p_quaternion,Vecteur3D p_position);
 
-    // Ajouter  transformation et transformation inverse pour vecteurs directions (dans Matrix4)
     // Tourne l'objet d'orientation p_quaternion, et donc modifie p_quaternion
     void transformation(Quaternion p_quaternion);
-    // transformation inverse
+    // Transformation inverse
     void transformationInverse(Quaternion p_quaternion);
 
+	//Permet d'afficher les elements de la matrice
+	//Utilise essentillement pour les tests
     std::string print();
 };
