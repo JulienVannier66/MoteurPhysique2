@@ -20,6 +20,8 @@ private:
     Matrix4 m_transforme;
     Matrix3 m_inverseInertiatensor;
 
+	bool t = true;
+
 public:
     /*Constructeurs et destructeur*/
 
@@ -31,7 +33,7 @@ public:
         , m_angularDumping(1)
         , m_position(0, 0, 0)
         , m_velocite(0, 0, 0)
-        , m_orientation(0, 0, 0, 0)
+        , m_orientation(1, 0, 0, 0)
         , m_rotation(0, 0, 0)
         , m_forceAccum(0, 0, 0)
         , m_torqueAccum(0, 0, 0)
@@ -50,7 +52,7 @@ public:
         , m_velocite(p_velocite)
         , m_rotation(p_rotation)
         , m_orientation(p_orientation)
-        , m_transforme(p_transforme) // pas sur que ce soit necessaire
+        , m_transforme(p_transforme)
         , m_forceAccum(0, 0, 0)
         , m_torqueAccum(0, 0, 0)
         , m_inverseInertiatensor()

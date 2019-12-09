@@ -27,8 +27,16 @@ void RigidBody::integrate(float p_duration)
     m_velocite = m_velocite * pow(m_linearDumping, p_duration) + l_linearAcceleration;		// Update velocite lineaire
     m_rotation = m_rotation * pow(m_angularDumping, p_duration) + l_angularAcceleration;	// Update velocite angulaire
 
+	
 	m_position += m_velocite * p_duration;													// Update position
     m_orientation.faireRotation(m_rotation * p_duration);									// Update orientation
+                                                              
+        //std::cout << l_angularAcceleration << std::endl;
+        //std::cout << m_rotation << std::endl;
+        //std::cout << m_orientation.print() << std::endl;
+        //std::cout << p_duration << std::endl;
+	
+
     calculDonneesDerivees();																// Calcul des donnees derivees
     clearAccumulateurs();																	// Vidage des accumulateurs
 }
