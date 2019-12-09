@@ -18,6 +18,7 @@ void RigidBody::clearAccumulateurs()
 void RigidBody::calculDonneesDerivees()
 {
     m_transforme = Matrix4::setOrientation(m_orientation, m_position);
+    m_orientation.normalize();
 }
 
 void RigidBody::integrate(float p_duration)
