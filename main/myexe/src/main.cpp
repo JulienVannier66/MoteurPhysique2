@@ -65,8 +65,8 @@ void renderScene(void)
     glPushMatrix();
 
     glTranslatef(r1.getPosition().getX(), r1.getPosition().getY(), r1.getPosition().getZ());
-    std::cout << "x : " << r1.getPosition().getX() << std::endl;
-    std::cout << "y : " << r1.getPosition().getY() << std::endl;
+    //std::cout << "x : " << r1.getPosition().getX() << std::endl;
+   // std::cout << "y : " << r1.getPosition().getY() << std::endl;
     glRotated(0.2 * i, r1.getRotation().getX(), r1.getRotation().getY(), r1.getRotation().getZ());
 
     glBegin(GL_QUADS);
@@ -91,15 +91,15 @@ void renderScene(void)
 
 int main(int argc, char** argv)
 {
-    r1.setPosition(Vecteur3D(-60, -10, -50));
-    r1.setRotation(Vecteur3D(0, 0, 1));
+    r1.setPosition(Vecteur3D(-60, -10, -80));
+    r1.setRotation(Vecteur3D(0.5, 1, 0));
     r1.addForce(Vecteur3D(1.3, 1, 0));
     r1.setMasse(20.0f);
     // init GLUT and create window
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-    glutInitWindowPosition(100, 100);
-    glutInitWindowSize(1000, 320);
+    glutInitWindowPosition(-60, 100);
+    glutInitWindowSize(2000, 1000);
     glutCreateWindow("Moteur physique Particule");
 
     // register callbacks
