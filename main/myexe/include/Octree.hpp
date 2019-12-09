@@ -3,7 +3,6 @@
 #include <BoundingBox.hpp>
 #include <vector>
 #include <queue>
-using namespace std; 
 
 class Octree
 {
