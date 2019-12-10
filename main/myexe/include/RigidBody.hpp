@@ -20,16 +20,15 @@ private:
     Matrix4 m_transforme;
     Matrix3 m_inverseInertiatensor;
 
-protected:
+    bool t = true;
+
+public:
     struct BoundingSphere
     {
         Vecteur3D centre;
         float rayon;
     };
 
-    bool t = true;
-
-public:
     /*Constructeurs et destructeur*/
 
     // constructeur par defaut

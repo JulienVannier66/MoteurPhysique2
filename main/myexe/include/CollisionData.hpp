@@ -11,7 +11,7 @@ private:
 public:
     CollisionData(){};
 
-    void addContact(Contact p_contact)
+    void addContact(Contact& p_contact)
     {
         m_contacts.push_back(p_contact);
         m_contactRestant++;
