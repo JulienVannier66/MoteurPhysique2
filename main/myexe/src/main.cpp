@@ -1,12 +1,13 @@
 #include "../../../external/freeglut-3.2.0/include/GL/freeglut_std.h"
 #include <GravityGenerator.hpp>
-#include <RigidBody.hpp>
+//#include <RigidBody.hpp>
+#include <Cube.hpp>
 #include <iostream>
 
 void inputKeyBoard(unsigned char key, int x, int y);
 void renderScene(void);
 
-RigidBody r1;
+Cube r1;
 GravityGenerator g;
 
 float startFrame = 0;
@@ -79,16 +80,19 @@ void renderScene(void)
 	float l_CubeSize = 5;
 
 	Vecteur3D cubePoints[8];
-    cubePoints[0] = l_finalMatrix * Vecteur3D(-l_CubeSize, -l_CubeSize, l_CubeSize);
-    cubePoints[1] = l_finalMatrix * Vecteur3D(-l_CubeSize, l_CubeSize, l_CubeSize);
-    cubePoints[2] = l_finalMatrix * Vecteur3D(l_CubeSize, l_CubeSize, l_CubeSize);
-    cubePoints[3] = l_finalMatrix * Vecteur3D(l_CubeSize, -l_CubeSize, l_CubeSize);
+        float x = r1.getDemiLongueur()[0];
+        float y = r1.getDemiLongueur()[1];
+        float z = r1.getDemiLongueur()[2];
+    cubePoints[0] = l_finalMatrix * Vecteur3D(-x, -y, z);
+    cubePoints[1] = l_finalMatrix * Vecteur3D(-x, y, z);
+    cubePoints[2] = l_finalMatrix * Vecteur3D(x, y, z);
+    cubePoints[3] = l_finalMatrix * Vecteur3D(x, -y, z);
     
-    cubePoints[4] = l_finalMatrix * Vecteur3D(-l_CubeSize, -l_CubeSize, -l_CubeSize);
-    cubePoints[5] = l_finalMatrix * Vecteur3D(-l_CubeSize, l_CubeSize, -l_CubeSize);
-    cubePoints[6] = l_finalMatrix * Vecteur3D(l_CubeSize, l_CubeSize, -l_CubeSize);
-    cubePoints[7] = l_finalMatrix * Vecteur3D(l_CubeSize, -l_CubeSize, -l_CubeSize);
-    
+    cubePoints[4] = l_finalMatrix * Vecteur3D(-x, -y, -z);
+    cubePoints[5] = l_finalMatrix * Vecteur3D(-x, y, -z);
+    cubePoints[6] = l_finalMatrix * Vecteur3D(x, y, -z);
+    cubePoints[7] = l_finalMatrix * Vecteur3D(x, -y, -z);
+
     glBegin(GL_QUADS);
 		// face 1 devant
 		glColor3b(60, 0, 0);
@@ -148,15 +152,17 @@ void renderScene(void)
 
 int main(int argc, char** argv)
 {
-    
+    Cube c();
     r1.setPosition(Vecteur3D(-100, -10, -50));
     r1.setRotation(Vecteur3D(1, 0, 0));
     //r1.addForce(Vecteur3D(70, 30, 0));
+    r1.setDemiLongueur(5, 5, 5);
+
     // init GLUT and create window
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-    glutInitWindowPosition(100, 100);
-    glutInitWindowSize(1000, 320);
+    glutInitWindowPosition(-60, 100);
+    glutInitWindowSize(2000, 1000);
     glutCreateWindow("Moteur physique Particule");
 
     // register callbacks
