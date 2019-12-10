@@ -167,13 +167,13 @@ int main(int argc, char** argv)
 {
     r1.getBody()->setPosition(Vecteur3D(-100, -10, -50));
     r1.getBody()->setRotation(Vecteur3D(0, 0, 1));
-    // r1.addForce(Vecteur3D(70, 30, 0));
+    //r1.addForce(Vecteur3D(70, 30, 0));
     r1.setDemiLongueur(5, 5, 5);
     // init GLUT and create window
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowPosition(-60, 100);
-    glutInitWindowSize(1500, 1000);
+    glutInitWindowSize(1500, 400);
     glutCreateWindow("Moteur physique Particule");
 
     // register callbacks
