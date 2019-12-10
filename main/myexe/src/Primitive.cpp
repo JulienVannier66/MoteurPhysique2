@@ -3,7 +3,7 @@
 
 Primitive::Primitive()
 {
-    m_body = &RigidBody();
+    m_body =  new RigidBody();
     m_offset = &Matrix4();
 }
 

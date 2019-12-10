@@ -9,9 +9,12 @@ private:
 public:
     Box() : Primitive()
     {
+        std::cout << "toto" << std::endl;
         setBoundingSphere(getBody()->getPosition(),
-                          sqrt(pow(m_demiLongueur.getX(), 2) + pow(m_demiLongueur.getY(), 2) +
-                               pow(m_demiLongueur.getZ(), 2)) / 2);
+                                           sqrt(pow(m_demiLongueur.getX(), 2) +
+                                                pow(m_demiLongueur.getY(), 2) +
+                                                pow(m_demiLongueur.getZ(), 2)) /
+                                               2);
     }
 
     Box(RigidBody* p_body, Matrix4* p_offset, float p_demi1, float p_demi2, float p_demi3)
@@ -23,7 +26,8 @@ public:
         m_demiLongueur.setZ(p_demi3);
         setBoundingSphere(getBody()->getPosition(),
                           sqrt(pow(m_demiLongueur.getX(), 2) + pow(m_demiLongueur.getY(), 2) +
-                               pow(m_demiLongueur.getZ(), 2)) /2);
+                               pow(m_demiLongueur.getZ(), 2)) /
+                              2);
     }
 
     Box(Box& p_box) : Primitive(p_box.getBody(), p_box.getOffset())
@@ -37,7 +41,6 @@ public:
                                pow(p_box.getDemiLongueur().getY(), 2) +
                                pow(p_box.getDemiLongueur().getZ(), 2)) /
                               2);
-            
     }
 
     ~Box() {}
