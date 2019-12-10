@@ -38,7 +38,7 @@ void changeSize(int w, int h)
     // Prevent a divide by zero, when window is too short
     if (h == 0) { h = 1; }
 
-    float ratio = w * 1.0 / h;
+    float ratio = w * 1.0f / h;
 
     // Use the Projection Matrix
     glMatrixMode(GL_PROJECTION);
@@ -92,6 +92,15 @@ void renderScene(void)
     cubePoints[5] = l_finalMatrix * Vecteur3D(-x, y, -z);
     cubePoints[6] = l_finalMatrix * Vecteur3D(x, y, -z);
     cubePoints[7] = l_finalMatrix * Vecteur3D(x, -y, -z);
+
+	std::cout << "cubePoints[0] : " << cubePoints[0] << std::endl;
+	std::cout << "cubePoints[1] : " << cubePoints[1] << std::endl;
+	std::cout << "cubePoints[2] : " << cubePoints[2] << std::endl;
+	std::cout << "cubePoints[3] : " << cubePoints[3] << std::endl;
+	std::cout << "cubePoints[4] : " << cubePoints[4] << std::endl;
+	std::cout << "cubePoints[5] : " << cubePoints[5] << std::endl;
+	std::cout << "cubePoints[6] : " << cubePoints[6] << std::endl;
+	std::cout << "cubePoints[7] : " << cubePoints[7] << std::endl;
 
     glBegin(GL_QUADS);
 		// face 1 devant
@@ -154,7 +163,7 @@ int main(int argc, char** argv)
 {
     Cube c();
     r1.setPosition(Vecteur3D(-100, -10, -50));
-    r1.setRotation(Vecteur3D(1, 0, 0));
+    r1.setRotation(Vecteur3D(0, 0, 1));
     //r1.addForce(Vecteur3D(70, 30, 0));
     r1.setDemiLongueur(5, 5, 5);
 
@@ -162,7 +171,7 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowPosition(-60, 100);
-    glutInitWindowSize(2000, 1000);
+    glutInitWindowSize(1000, 300);
     glutCreateWindow("Moteur physique Particule");
 
     // register callbacks
