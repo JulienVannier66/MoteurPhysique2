@@ -53,4 +53,5 @@ public:
     }
 
     Vecteur3D getDemiLongueur() { return m_demiLongueur; }
+
 };
