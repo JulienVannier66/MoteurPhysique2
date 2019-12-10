@@ -17,7 +17,7 @@ public:
                                                2);
     }
 
-    Box(RigidBody* p_body, Matrix4* p_offset, float p_demi1, float p_demi2, float p_demi3)
+    Box(RigidBody* p_body, Matrix4 p_offset, float p_demi1, float p_demi2, float p_demi3)
         : Primitive(p_body, p_offset)
     {
 

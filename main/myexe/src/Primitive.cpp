@@ -3,11 +3,11 @@
 
 Primitive::Primitive()
 {
-    m_body =  new RigidBody();
-    m_offset = &Matrix4();
+    m_body = new RigidBody();
+    m_offset = Matrix4();
 }
 
-Primitive::Primitive(RigidBody* p_body, Matrix4* p_offset)
+Primitive::Primitive(RigidBody* p_body, Matrix4 p_offset)
 {
     m_body = p_body;
     m_offset = p_offset;
