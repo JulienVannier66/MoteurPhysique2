@@ -147,7 +147,7 @@ int main(int argc, char** argv)
 {
     
     r1.setPosition(Vecteur3D(-100, -10, -50));
-    r1.setRotation(Vecteur3D(0, 1, 1));
+    r1.setRotation(Vecteur3D(0, 0, 1));
     r1.addForce(Vecteur3D(70, 30, 0));
     // init GLUT and create window
     glutInit(&argc, argv);
