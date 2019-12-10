@@ -55,7 +55,10 @@ void renderScene(void)
 {
     calculFrame(nbFrames, lastTime);
     startFrame = glutGet(GLUT_ELAPSED_TIME); // Get start time to calculate deltaFrame for a frame
-    r1.addForce(Vecteur3D(0.00, -0.4, 0));
+
+    glEnable(GL_DEPTH_TEST);              // Enables Depth Testing
+
+    //r1.addForce(Vecteur3D(0.00, -0.4, 0));
     /*
 	std::cout << "delta : " << deltaFrame << std::endl;
 	std::cout << "start : " << startFrame << std::endl;
@@ -147,8 +150,8 @@ int main(int argc, char** argv)
 {
     
     r1.setPosition(Vecteur3D(-100, -10, -50));
-    r1.setRotation(Vecteur3D(0, 0, 1));
-    r1.addForce(Vecteur3D(70, 30, 0));
+    r1.setRotation(Vecteur3D(1, 0, 0));
+    //r1.addForce(Vecteur3D(70, 30, 0));
     // init GLUT and create window
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
