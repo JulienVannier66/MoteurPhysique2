@@ -34,7 +34,8 @@ set(HEADERS
 			${INCLUDE_FOLDER}/Primitive.hpp
 			${INCLUDE_FOLDER}/CollisionData.hpp
 			${INCLUDE_FOLDER}/Contact.hpp
-			${INCLUDE_FOLDER}/Cube.hpp)
+			${INCLUDE_FOLDER}/Cube.hpp
+			${INCLUDE_FOLDER}/Plane.hpp)
 #Main exec
 add_executable(${PROJECT_NAME} ${SOURCE_FOLDER}/main.cpp ${SOURCES} ${HEADERS})
 add_executable(${PROJECT_NAME}_2 ${SOURCE_FOLDER}/main_v1.cpp ${SOURCES} ${HEADERS})

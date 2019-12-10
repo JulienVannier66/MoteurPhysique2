@@ -93,14 +93,14 @@ void renderScene(void)
     cubePoints[6] = l_finalMatrix * Vecteur3D(x, y, -z);
     cubePoints[7] = l_finalMatrix * Vecteur3D(x, -y, -z);
 
-	std::cout << "cubePoints[0] : " << cubePoints[0] << std::endl;
+	/*std::cout << "cubePoints[0] : " << cubePoints[0] << std::endl;
 	std::cout << "cubePoints[1] : " << cubePoints[1] << std::endl;
 	std::cout << "cubePoints[2] : " << cubePoints[2] << std::endl;
 	std::cout << "cubePoints[3] : " << cubePoints[3] << std::endl;
 	std::cout << "cubePoints[4] : " << cubePoints[4] << std::endl;
 	std::cout << "cubePoints[5] : " << cubePoints[5] << std::endl;
 	std::cout << "cubePoints[6] : " << cubePoints[6] << std::endl;
-	std::cout << "cubePoints[7] : " << cubePoints[7] << std::endl;
+	std::cout << "cubePoints[7] : " << cubePoints[7] << std::endl;*/
 
     glBegin(GL_QUADS);
 		// face 1 devant
