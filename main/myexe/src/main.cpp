@@ -10,8 +10,14 @@
 void inputKeyBoard(unsigned char key, int x, int y);
 void renderScene(void);
 
-Box r1;
-GravityGenerator g;
+/*vérifie s'il il y a un contact réel entre deux primitive, si c'est le cas, on rajoute le contact
+ * dans data*/
+void generateContact(Primitive p_prim1, Primitive p_prim2, CollisionData& p_data)
+{
+    if (Box* p_prim1 = dynamic_cast<Box*>(p_prim1)) { std::cout << "caca" << std::endl; }
+}
+    Box r1;
+    GravityGenerator g;
 
 float startFrame = 0;
 float endFrame = 0;
@@ -169,6 +175,8 @@ int main(int argc, char** argv)
     r1.getBody()->setRotation(Vecteur3D(0, 0, 1));
     //r1.addForce(Vecteur3D(70, 30, 0));
     r1.setDemiLongueur(5, 5, 5);
+    CollisionData col;
+    generateContact(r1, r1, col);
     // init GLUT and create window
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
@@ -187,25 +195,20 @@ int main(int argc, char** argv)
     return 1;
 }
 
-/*vérifie s'il il y a un contact réel entre deux primitive, si c'est le cas, on rajoute le contact
- * dans data*/
-/*void generateContact(Primitive prim1, Primitive prim2, CollisionData& data)
-{
-    // test Vertex-Face, on regarde  si un sommet de prim1 est dans prim2
-    bool vertex_Face = false;
-    for (int i = 0; i < 8; i++) { vertex_Face = vertex_Face || prim1. }
-}*/
 
-/*bool pointInCube(Vecteur3D point, Primitive prim)
-{
-    bool temp;
-    float xmin, xmax, ymin, ymax, zmin, zmax;
-    for (int i = 0; i < 8; i++) {
-        if (Box* prim = dynamic_cast<Cube*>(Primitive))
-        {
-            // old was safely casted to NewType
-            prim->doSomething();
-        }
-    }
-    temp = point.getX <
-}*/
+
+//bool pointInCube(Vecteur3D point, Primitive prim)
+//{
+//    bool temp;
+//    float xmin, xmax, ymin, ymax, zmin, zmax;
+//    for (int i = 0; i < 8; i++) {
+//        if (Box* prim = dynamic_cast<Box*>(prim))
+//        {
+//            // old was safely casted to NewType
+//            prim->getDemiLongueur();
+//        }
+//    }
+//    temp = point.getX <
+//} //// test Vertex-Face, on regarde  si un sommet de prim1 est dans prim2
+  // bool vertex_Face = false;
+  // for (int i = 0; i < 8; i++) { vertex_Face = vertex_Face || prim1. }
