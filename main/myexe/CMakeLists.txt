@@ -15,8 +15,7 @@ set(SOURCES
 			${SOURCE_FOLDER}/Quaternion.cpp
 			${SOURCE_FOLDER}/RessortGenerator.cpp
 			${SOURCE_FOLDER}/GravityGenerator.cpp
-			${SOURCE_FOLDER}/Primitive.cpp
-			${SOURCE_FOLDER}/Cube.cpp)
+			${SOURCE_FOLDER}/Primitive.cpp)
 
 #Headers files (for IntelliSense)
 set(HEADERS
@@ -34,7 +33,7 @@ set(HEADERS
 			${INCLUDE_FOLDER}/Primitive.hpp
 			${INCLUDE_FOLDER}/CollisionData.hpp
 			${INCLUDE_FOLDER}/Contact.hpp
-			${INCLUDE_FOLDER}/Cube.hpp
+			${INCLUDE_FOLDER}/Box.hpp
 			${INCLUDE_FOLDER}/Plane.hpp)
 #Main exec
 add_executable(${PROJECT_NAME} ${SOURCE_FOLDER}/main.cpp ${SOURCES} ${HEADERS})

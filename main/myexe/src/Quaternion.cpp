@@ -34,7 +34,7 @@ void Quaternion::normalize()
         m_data.at(2) = l_d * l_j;
         m_data.at(3) = l_d * l_k;
 
-		std::cout << "************** -> " << l_d << std::endl;
+		//std::cout << "************** -> " << l_d << std::endl;
     }
 }
 
@@ -184,19 +184,19 @@ void Quaternion::faireRotation(Vecteur3D& p_vecteur)
     l_vector.push_back(p_vecteur.getZ());
 
 	//On cree un quaternion a partir de ce vecteur
-    Quaternion q = Quaternion(l_vector);
+    Quaternion q = Quaternion(l_vector);/*
     std::cout << "--------------------" << std::endl;
-	std::cout << "q avant norm : " << q.print() << std::endl;
+	std::cout << "q avant norm : " << q.print() << std::endl;*/
 
     //On applique la rotation (self * q)
     q.normalize();
-        std::cout << "q apres norm : " << q.print() << std::endl << std::endl;
-    std::cout << "q this avant : " << this->print() << std::endl;
+    //    std::cout << "q apres norm : " << q.print() << std::endl << std::endl;
+    //std::cout << "q this avant : " << this->print() << std::endl;
     *this *= q;
-    std::cout << "q this apres sans norm : " << this->print() << std::endl;
+    //std::cout << "q this apres sans norm : " << this->print() << std::endl;
     this->normalize();
-    std::cout << "q this apres avec norm: " << this->print() << std::endl;
-    std::cout << "--------------------" << std::endl;
+    //std::cout << "q this apres avec norm: " << this->print() << std::endl;
+    //std::cout << "--------------------" << std::endl;
     ;
 }
 

@@ -1,14 +1,23 @@
 #include "../../../external/freeglut-3.2.0/include/GL/freeglut_std.h"
+#include <Box.hpp>
+#include <CollisionData.hpp>
 #include <GravityGenerator.hpp>
-//#include <RigidBody.hpp>
-#include <Cube.hpp>
+#include <Primitive.hpp>
+#include <RigidBody.hpp>
 #include <iostream>
+#include <typeinfo>
 
 void inputKeyBoard(unsigned char key, int x, int y);
 void renderScene(void);
 
-Cube r1;
-GravityGenerator g;
+/*v�rifie s'il il y a un contact r�el entre deux primitive, si c'est le cas, on rajoute le contact
+ * dans data*/
+void generateContact(Primitive p_prim1, Primitive p_prim2, CollisionData& p_data)
+{
+    if (Box* p_prim1 = dynamic_cast<Box*>(p_prim1)) { std::cout << "caca" << std::endl; }
+}
+    Box r1;
+    GravityGenerator g;
 
 float startFrame = 0;
 float endFrame = 0;
@@ -26,7 +35,7 @@ void calculFrame(int& nbFrames, float& lastTime)
     if (currentTime - lastTime >= 1000)
     {
         // cout and reset timer
-        std::cout << "FPS : " << nbFrames << std::endl;
+     /*   std::cout << "FPS : " << nbFrames << std::endl;*/
         nbFrames = 0;
         lastTime += 1000;
     }
@@ -57,37 +66,39 @@ void renderScene(void)
     calculFrame(nbFrames, lastTime);
     startFrame = glutGet(GLUT_ELAPSED_TIME); // Get start time to calculate deltaFrame for a frame
 
-    glEnable(GL_DEPTH_TEST);              // Enables Depth Testing
+    glEnable(GL_DEPTH_TEST); // Enables Depth Testing
 
-    //r1.addForce(Vecteur3D(0.00, -0.4, 0));
+    // r1.addForce(Vecteur3D(0.00, -0.4, 0));
     /*
-	std::cout << "delta : " << deltaFrame << std::endl;
-	std::cout << "start : " << startFrame << std::endl;
-	std::cout << "end : " << endFrame << std::endl;*/
-    r1.integrate(deltaFrame);
-    g.updateForce(r1, deltaFrame);
+        std::cout << "delta : " << deltaFrame << std::endl;
+        std::cout << "start : " << startFrame << std::endl;
+        std::cout << "end : " << endFrame << std::endl;*/
+    r1.getBody()->integrate(deltaFrame);
+    g.updateForce(*(r1.getBody()), deltaFrame);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
 
-    glTranslatef(r1.getPosition().getX(), r1.getPosition().getY(), r1.getPosition().getZ());
-    //std::cout << "x : " << r1.getPosition().getX() << std::endl;
-    //std::cout << "y : " << r1.getPosition().getY() << std::endl;
-    //glRotated(0.2 * i, r1.getRotation().getX(), r1.getRotation().getY(), r1.getRotation().getZ());
+    glTranslatef(r1.getBody()->getPosition().getX(), r1.getBody()->getPosition().getY(),
+                 r1.getBody()->getPosition().getZ());
+    // std::cout << "x : " << r1.getPosition().getX() << std::endl;
+    // std::cout << "y : " << r1.getPosition().getY() << std::endl;
+    // glRotated(0.2 * i, r1.getRotation().getX(), r1.getRotation().getY(),
+    // r1.getRotation().getZ());
 
-	Matrix4 l_finalMatrix = r1.getTransformMatrice();
-	float l_CubeSize = 5;
+    Matrix4 l_finalMatrix = r1.getBody()->getTransformMatrice();
+    float l_CubeSize = 5;
 
-	Vecteur3D cubePoints[8];
-        float x = r1.getDemiLongueur()[0];
-        float y = r1.getDemiLongueur()[1];
-        float z = r1.getDemiLongueur()[2];
+    Vecteur3D cubePoints[8];
+    float x = r1.getDemiLongueur().getX();
+    float y = r1.getDemiLongueur().getY();
+    float z = r1.getDemiLongueur().getZ();
     cubePoints[0] = l_finalMatrix * Vecteur3D(-x, -y, z);
     cubePoints[1] = l_finalMatrix * Vecteur3D(-x, y, z);
     cubePoints[2] = l_finalMatrix * Vecteur3D(x, y, z);
     cubePoints[3] = l_finalMatrix * Vecteur3D(x, -y, z);
-    
+
     cubePoints[4] = l_finalMatrix * Vecteur3D(-x, -y, -z);
     cubePoints[5] = l_finalMatrix * Vecteur3D(-x, y, -z);
     cubePoints[6] = l_finalMatrix * Vecteur3D(x, y, -z);
@@ -103,49 +114,48 @@ void renderScene(void)
 	std::cout << "cubePoints[7] : " << cubePoints[7] << std::endl;*/
 
     glBegin(GL_QUADS);
-		// face 1 devant
-		glColor3b(60, 0, 0);
-		glVertex3f(cubePoints[0].getX(), cubePoints[0].getY(), cubePoints[0].getZ());
-		glVertex3f(cubePoints[1].getX(), cubePoints[1].getY(), cubePoints[1].getZ());
-		glVertex3f(cubePoints[2].getX(), cubePoints[2].getY(), cubePoints[2].getZ());
-		glVertex3f(cubePoints[3].getX(), cubePoints[3].getY(), cubePoints[3].getZ());
+    // face 1 devant
+    glColor3b(60, 0, 0);
+    glVertex3f(cubePoints[0].getX(), cubePoints[0].getY(), cubePoints[0].getZ());
+    glVertex3f(cubePoints[1].getX(), cubePoints[1].getY(), cubePoints[1].getZ());
+    glVertex3f(cubePoints[2].getX(), cubePoints[2].getY(), cubePoints[2].getZ());
+    glVertex3f(cubePoints[3].getX(), cubePoints[3].getY(), cubePoints[3].getZ());
 
-		//face 2 derriere
-		glColor3b(0, 60, 0);
-        glVertex3f(cubePoints[4].getX(), cubePoints[4].getY(), cubePoints[4].getZ());
-        glVertex3f(cubePoints[5].getX(), cubePoints[5].getY(), cubePoints[5].getZ());
-        glVertex3f(cubePoints[6].getX(), cubePoints[6].getY(), cubePoints[6].getZ());
-        glVertex3f(cubePoints[7].getX(), cubePoints[7].getY(), cubePoints[7].getZ());
-	
-		//face 3 droite
-		glColor3b(60, 60, 0);
-        glVertex3f(cubePoints[2].getX(), cubePoints[2].getY(), cubePoints[2].getZ());
-        glVertex3f(cubePoints[3].getX(), cubePoints[3].getY(), cubePoints[3].getZ());
-        glVertex3f(cubePoints[7].getX(), cubePoints[7].getY(), cubePoints[7].getZ());
-        glVertex3f(cubePoints[6].getX(), cubePoints[6].getY(), cubePoints[6].getZ());
+    // face 2 derriere
+    glColor3b(0, 60, 0);
+    glVertex3f(cubePoints[4].getX(), cubePoints[4].getY(), cubePoints[4].getZ());
+    glVertex3f(cubePoints[5].getX(), cubePoints[5].getY(), cubePoints[5].getZ());
+    glVertex3f(cubePoints[6].getX(), cubePoints[6].getY(), cubePoints[6].getZ());
+    glVertex3f(cubePoints[7].getX(), cubePoints[7].getY(), cubePoints[7].getZ());
 
-		//face 4 gauche
-		glColor3b(60, 60, 60);
-        glVertex3f(cubePoints[0].getX(), cubePoints[0].getY(), cubePoints[0].getZ());
-        glVertex3f(cubePoints[1].getX(), cubePoints[1].getY(), cubePoints[1].getZ());
-        glVertex3f(cubePoints[5].getX(), cubePoints[5].getY(), cubePoints[5].getZ());
-        glVertex3f(cubePoints[4].getX(), cubePoints[4].getY(), cubePoints[4].getZ());
+    // face 3 droite
+    glColor3b(60, 60, 0);
+    glVertex3f(cubePoints[2].getX(), cubePoints[2].getY(), cubePoints[2].getZ());
+    glVertex3f(cubePoints[3].getX(), cubePoints[3].getY(), cubePoints[3].getZ());
+    glVertex3f(cubePoints[7].getX(), cubePoints[7].getY(), cubePoints[7].getZ());
+    glVertex3f(cubePoints[6].getX(), cubePoints[6].getY(), cubePoints[6].getZ());
 
-		// face 5 haut
-		glColor3b(0, 0, 60);
-		glVertex3f(cubePoints[1].getX(), cubePoints[1].getY(), cubePoints[1].getZ());
-		glVertex3f(cubePoints[2].getX(), cubePoints[2].getY(), cubePoints[2].getZ());
-		glVertex3f(cubePoints[6].getX(), cubePoints[6].getY(), cubePoints[6].getZ());
-		glVertex3f(cubePoints[5].getX(), cubePoints[5].getY(), cubePoints[5].getZ());
+    // face 4 gauche
+    glColor3b(60, 60, 60);
+    glVertex3f(cubePoints[0].getX(), cubePoints[0].getY(), cubePoints[0].getZ());
+    glVertex3f(cubePoints[1].getX(), cubePoints[1].getY(), cubePoints[1].getZ());
+    glVertex3f(cubePoints[5].getX(), cubePoints[5].getY(), cubePoints[5].getZ());
+    glVertex3f(cubePoints[4].getX(), cubePoints[4].getY(), cubePoints[4].getZ());
 
-		// face 6 bas
-		glColor3b(60, 0, 60);
-		glVertex3f(cubePoints[0].getX(), cubePoints[0].getY(), cubePoints[0].getZ());
-		glVertex3f(cubePoints[3].getX(), cubePoints[3].getY(), cubePoints[3].getZ());
-		glVertex3f(cubePoints[7].getX(), cubePoints[7].getY(), cubePoints[7].getZ());
-		glVertex3f(cubePoints[4].getX(), cubePoints[4].getY(), cubePoints[4].getZ());
+    // face 5 haut
+    glColor3b(0, 0, 60);
+    glVertex3f(cubePoints[1].getX(), cubePoints[1].getY(), cubePoints[1].getZ());
+    glVertex3f(cubePoints[2].getX(), cubePoints[2].getY(), cubePoints[2].getZ());
+    glVertex3f(cubePoints[6].getX(), cubePoints[6].getY(), cubePoints[6].getZ());
+    glVertex3f(cubePoints[5].getX(), cubePoints[5].getY(), cubePoints[5].getZ());
+
+    // face 6 bas
+    glColor3b(60, 0, 60);
+    glVertex3f(cubePoints[0].getX(), cubePoints[0].getY(), cubePoints[0].getZ());
+    glVertex3f(cubePoints[3].getX(), cubePoints[3].getY(), cubePoints[3].getZ());
+    glVertex3f(cubePoints[7].getX(), cubePoints[7].getY(), cubePoints[7].getZ());
+    glVertex3f(cubePoints[4].getX(), cubePoints[4].getY(), cubePoints[4].getZ());
     glEnd();
-    
 
     glPopMatrix();
     glFlush();
@@ -156,22 +166,22 @@ void renderScene(void)
     i = glutGet(GLUT_ELAPSED_TIME);
 
     endFrame = glutGet(GLUT_ELAPSED_TIME); // Get end time for deltaFrame
-    deltaFrame = (endFrame - startFrame)/1000;
+    deltaFrame = (endFrame - startFrame) / 1000;
 }
 
 int main(int argc, char** argv)
 {
-    Cube c();
-    r1.setPosition(Vecteur3D(-100, -10, -50));
-    r1.setRotation(Vecteur3D(0, 0, 1));
+    r1.getBody()->setPosition(Vecteur3D(-100, -10, -50));
+    r1.getBody()->setRotation(Vecteur3D(0, 0, 1));
     //r1.addForce(Vecteur3D(70, 30, 0));
     r1.setDemiLongueur(5, 5, 5);
-
+    CollisionData col;
+    generateContact(r1, r1, col);
     // init GLUT and create window
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowPosition(-60, 100);
-    glutInitWindowSize(1000, 300);
+    glutInitWindowSize(1500, 400);
     glutCreateWindow("Moteur physique Particule");
 
     // register callbacks
@@ -184,3 +194,21 @@ int main(int argc, char** argv)
 
     return 1;
 }
+
+
+
+//bool pointInCube(Vecteur3D point, Primitive prim)
+//{
+//    bool temp;
+//    float xmin, xmax, ymin, ymax, zmin, zmax;
+//    for (int i = 0; i < 8; i++) {
+//        if (Box* prim = dynamic_cast<Box*>(prim))
+//        {
+//            // old was safely casted to NewType
+//            prim->getDemiLongueur();
+//        }
+//    }
+//    temp = point.getX <
+//} //// test Vertex-Face, on regarde  si un sommet de prim1 est dans prim2
+  // bool vertex_Face = false;
+  // for (int i = 0; i < 8; i++) { vertex_Face = vertex_Face || prim1. }

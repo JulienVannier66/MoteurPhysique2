@@ -17,7 +17,7 @@ public:
         , m_penetration(p_penetration)
     {}
 
-    Contact(Contact& p_contact)
+    Contact(const Contact& p_contact)
         : m_contactNormal(p_contact.m_contactNormal)
         , m_contactPoint(p_contact.m_contactPoint)
         , m_penetration(p_contact.m_penetration)
