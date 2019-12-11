@@ -21,7 +21,7 @@
       "cmakeCommandArgs": "",
       "buildCommandArgs": "-v",
       "ctestCommandArgs": "",
-      "inheritEnvironments": [ "msvc_x86_x64" ],
+      "inheritEnvironments": [ "msvc_x86" ],
       "variables": []
     }
   ]

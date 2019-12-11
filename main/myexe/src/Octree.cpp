@@ -1,25 +1,11 @@
 #include <Octree.hpp>
 
-/*Note: we want to avoid allocating memory for as long as possible since there can be lots of
- * nodes.*/
-///
-/// Creates an oct tree which encloses the given region and contains the provided objects.
-///
-
-/// The bounding region for the oct tree.
-/// The list of objects contained within the bounding region
 Octree::Octree(Rectangle p_region, std::list<RigidBody::BoundingSphere> p_objList)
 {
     m_region = p_region;
     m_objects = p_objList;
 }
 
-///
-/// Creates an octTree with a suggestion for the bounding region containing the items.
-///
-
-/// The suggested dimensions for the bounding region.
-/// Note: if items are outside this region, the region will be automatically resized.
 Octree::Octree(Rectangle p_region)
 {
     m_region = p_region;
@@ -35,34 +21,15 @@ Octree::Octree(Octree& p_octree)
 	m_parent = p_octree.m_parent;
 }
 
-// void Octree::UpdateTree()
-//{
-//    if (!m_treeBuilt)
-//    {
-//        while (m_pendingInsertion.size() != 0)
-//        {
-//            m_objects.push_back(m_pendingInsertion.front());
-//            m_pendingInsertion.pop();
-//        }
-//        BuildTree();
-//    }
-//    else
-//    {
-//        while (m_pendingInsertion.size() != 0) { Insert(m_pendingInsertion.pop()); }
-//    }
-//    m_treeReady = true;
-//}
-
-void Octree::BuildTree() // complete & tested
+void Octree::BuildTree() 
 {
-    // terminate the recursion if we're a leaf node
+    // si on arrive à une feuille on termine la fonction
     if (m_objects.size() <= 2) return;
 
     Vecteur3D dimensions = m_region.getMax() - m_region.getMin();
-
     Vecteur3D vecteur0 = Vecteur3D(0, 0, 0);
 
-    // Check to see if the dimensions of the box are greater than the minimum dimensions
+	//On vérifie si les dimensions du cube sont plus grandes que les dimensions minimum
     if (dimensions.getX() <= m_taille_min && dimensions.getY() <= m_taille_min &&
         dimensions.getZ() <= m_taille_min)
     { return; }
@@ -70,9 +37,8 @@ void Octree::BuildTree() // complete & tested
     Vecteur3D half = dimensions * 0.5f;
     Vecteur3D center = m_region.getMin() + half;
 
-    // Create subdivided regions for each octant
+    // On crée les subdivisions de l'octree
     std::vector<Rectangle> octant;
-    // Rectangle[] octant = new Rectangle[8];
     octant.push_back(Rectangle(m_region.getMin(), center));
     octant.push_back(
         Rectangle(Vecteur3D(center.getX(), m_region.getMin().getY(), m_region.getMin().getZ()),
@@ -94,7 +60,7 @@ void Octree::BuildTree() // complete & tested
         Rectangle(Vecteur3D(m_region.getMin().getX(), center.getY(), center.getZ()),
                   Vecteur3D(center.getX(), m_region.getMax().getY(), m_region.getMax().getZ())));
 
-    // This will contain all of our objects which fit within each respective octant.
+    //Liste contenant les objets à ajouter
     std::vector<std::vector<RigidBody::BoundingSphere>> octList;
 
     for (RigidBody::BoundingSphere obj : m_objects)
@@ -120,7 +86,7 @@ void Octree::BuildTree() // complete & tested
         }
     }
 
-    // Create child nodes where there are items contained in the bounding region
+    //Création des enfants
     for (int i = 0; i < 8; i++)
     {
         if (octList.at(i).size() != 0)
@@ -133,7 +99,6 @@ void Octree::BuildTree() // complete & tested
             m_enfants.at(i).BuildTree();
         }
     }
-
 }
 
 Octree Octree::CreateNode(Rectangle region,
@@ -153,4 +118,6 @@ Octree Octree::CreateNode(Rectangle p_region, RigidBody::BoundingSphere p_item)
     ret.m_parent = this;
     return ret;
 }
+
+
 
