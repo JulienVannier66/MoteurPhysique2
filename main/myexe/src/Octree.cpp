@@ -12,15 +12,6 @@ Octree::Octree(Rectangle p_region)
     m_objects = std::list<RigidBody::BoundingSphere>();
 }
 
-Octree::Octree(Octree& p_octree)
-{
-    m_region = p_octree.m_region;
-    m_objects = p_octree.m_objects;
-    m_enfants = p_octree.m_enfants;
-    m_activeNodes = p_octree.m_activeNodes;
-	m_parent = p_octree.m_parent;
-}
-
 void Octree::BuildTree() 
 {
     // si on arrive à une feuille on termine la fonction

@@ -45,7 +45,9 @@ public:
     Octree(Rectangle p_region);
 
     // Constructeur de copie
-    Octree(Octree& p_octree);
+    //Octree(const Octree& p_octree);
+
+	//Octree& operator=(const Octree&)
 
     //Construction de l'octree
     void BuildTree();
