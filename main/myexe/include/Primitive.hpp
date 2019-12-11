@@ -1,6 +1,7 @@
 #pragma once
 #include "Matrix4.hpp"
 #include "RigidBody.hpp"
+#include "Vecteur3D.hpp"
 
 class Primitive
 {
@@ -9,7 +10,11 @@ private:
     Matrix4 m_offset;
     RigidBody::BoundingSphere m_boundingSphere;
 
+protected:
+    Vecteur3D m_demiLongueur = Vecteur3D(0.5f, 0.5f, 0.5f);
+
 public:
+
     Primitive();
     Primitive(RigidBody* p_body, Matrix4 p_offset);
     Primitive(Primitive& p_primitive);

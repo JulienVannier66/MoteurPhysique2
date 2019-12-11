@@ -9,7 +9,7 @@ private:
 
 public:
     Plane() = default;
-    Plane(Vecteur3D p_normal, p_offset)
+    Plane(Vecteur3D p_normal,float p_offset)
     {
         m_normal = p_normal;
         m_offset = p_offset;
@@ -24,6 +24,6 @@ public:
 	Vecteur3D getNormal() { return m_normal; }
     float getOffset() { return m_offset; }
 
-	void setNormal(Vecteur3D p_normal){m_normal = p_normal};
-    void setOffset(float p_offset) {m_offset = p_offset}
+	void setNormal(Vecteur3D p_normal) { m_normal = p_normal; };
+    void setOffset(float p_offset) { m_offset = p_offset; }
 };
