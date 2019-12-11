@@ -16,6 +16,7 @@ void renderScene(void);
 Plane p1;
 Box r1;
 GravityGenerator g;
+CollisionData col;
 
 float startFrame = 0;
 float endFrame = 0;
@@ -55,13 +56,16 @@ void generateContactBoxPlane(Box p_box, Plane p_plane, CollisionData& p_data)
     // int countPos = 0;
     for (int i = 0; i < 8; i++)
     {
-        if (float dist =
-                cubePoints[i].produitScalaire(p_plane.getNormal()) + p_plane.getOffset() <= 0)
+        float dist = cubePoints[i].produitScalaire(p_plane.getNormal()) + p_plane.getOffset();
+        if ( dist <= 0)
         { // countPos++;
             Contact l_contact(cubePoints[i], p_plane.getNormal(), dist);
             p_data.addContact(l_contact);
         }
+		std::cout << dist << " [" << i << "]" << std::endl;
     }
+    
+    std::cout << p_data.getContactRestant() << std::endl;
 }
 
 void inputKeyBoard(unsigned char key, int x, int y) { std::cout << "t" << std::endl; }
@@ -114,12 +118,12 @@ void renderScene(void)
     r1.getBody()->integrate(deltaFrame);
     g.updateForce(*(r1.getBody()), deltaFrame);
 
+	generateContactBoxPlane(r1, p1, col);
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
 
-    glTranslatef(r1.getBody()->getPosition().getX(), r1.getBody()->getPosition().getY(),
-                 r1.getBody()->getPosition().getZ());
     // std::cout << "x : " << r1.getPosition().getX() << std::endl;
     // std::cout << "y : " << r1.getPosition().getY() << std::endl;
     // glRotated(0.2 * i, r1.getRotation().getX(), r1.getRotation().getY(),
@@ -150,6 +154,8 @@ void renderScene(void)
     std::cout << "cubePoints[5] : " << cubePoints[5] << std::endl;
     std::cout << "cubePoints[6] : " << cubePoints[6] << std::endl;
     std::cout << "cubePoints[7] : " << cubePoints[7] << std::endl;*/
+    //glTranslatef(r1.getBody()->getPosition().getX(), r1.getBody()->getPosition().getY(),
+                 //r1.getBody()->getPosition().getZ());
 
     glBegin(GL_QUADS);
     // face 1 devant
@@ -199,8 +205,8 @@ void renderScene(void)
     glColor3b(60, 60, 60);
         glVertex3f(p1.getOffset(), 10, -10);
 		glVertex3f(p1.getOffset(), -10, -10);
-		glVertex3f(p1.getOffset() +10, -10, 10);
-		glVertex3f(p1.getOffset() + 10, 10, 10);
+		glVertex3f(p1.getOffset() +1, -10, 10);
+		glVertex3f(p1.getOffset() + 1, 10, 10);
     glEnd();
 
     glPopMatrix();
@@ -219,13 +225,13 @@ int main(int argc, char** argv)
 {
     r1.getBody()->setPosition(Vecteur3D(-100, -10, -50));
     r1.getBody()->setRotation(Vecteur3D(0, 0, 1));
-    // r1.addForce(Vecteur3D(70, 30, 0));
+    r1.getBody()->addForce(Vecteur3D(70, 0, 0));
+    //r1.getBody()->setVelocite(Vecteur3D(50, 0, 0));
     r1.setDemiLongueur(5, 5, 5);
 
-	p1.setOffset(100);
+	p1.setOffset(10);
     p1.setNormal(Vecteur3D(1, 0, 0));
 
-    CollisionData col;
     // init GLUT and create window
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);

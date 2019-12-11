@@ -16,4 +16,6 @@ public:
         m_contacts.push_back(p_contact);
         m_contactRestant++;
     }
+
+	int getContactRestant() { return m_contactRestant; }
 };
