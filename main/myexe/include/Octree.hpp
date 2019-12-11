@@ -43,9 +43,6 @@ public:
     Octree(Rectangle p_region, std::list<RigidBody::BoundingSphere> p_objList);
     Octree(Rectangle p_region);
 
-	//Constructeur de copie
-    Octree(Octree& p_octree);
-
     /// Naively builds an oct tree from scratch.
     void BuildTree();
 

@@ -26,33 +26,6 @@ Octree::Octree(Rectangle p_region)
     m_objects = std::list<RigidBody::BoundingSphere>();
 }
 
-Octree::Octree(Octree& p_octree)
-{
-    m_region = p_octree.m_region;
-    m_objects = p_octree.m_objects;
-    m_enfants = p_octree.m_enfants;
-    m_activeNodes = p_octree.m_activeNodes;
-	m_parent = p_octree.m_parent;
-}
-
-// void Octree::UpdateTree()
-//{
-//    if (!m_treeBuilt)
-//    {
-//        while (m_pendingInsertion.size() != 0)
-//        {
-//            m_objects.push_back(m_pendingInsertion.front());
-//            m_pendingInsertion.pop();
-//        }
-//        BuildTree();
-//    }
-//    else
-//    {
-//        while (m_pendingInsertion.size() != 0) { Insert(m_pendingInsertion.pop()); }
-//    }
-//    m_treeReady = true;
-//}
-
 void Octree::BuildTree() // complete & tested
 {
     // terminate the recursion if we're a leaf node
