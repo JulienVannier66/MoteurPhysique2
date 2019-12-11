@@ -58,11 +58,11 @@ void renderScene(void)
 {
     calculFrame(nbFrames, lastTime);
     startFrame = glutGet(GLUT_ELAPSED_TIME); // Get start time to calculate deltaFrame for a frame
-    
-	t1();
-	t2();
-    
-	i = glutGet(GLUT_ELAPSED_TIME);
+
+    t1();
+    t2();
+
+    i = glutGet(GLUT_ELAPSED_TIME);
 
     endFrame = glutGet(GLUT_ELAPSED_TIME); // Get end time for deltaFrame
     deltaFrame = endFrame - startFrame;
@@ -75,7 +75,7 @@ int main(int argc, char** argv)
     r1.addForce(Vecteur3D(0.5, 0, 0));
     r1.setMasse(20.0f);
 
-	r2.setPosition(Vecteur3D(60, -10, -50));
+    r2.setPosition(Vecteur3D(60, -10, -50));
     r2.setRotation(Vecteur3D(0, 0, 0));
     r2.addForce(Vecteur3D(-0.5, 0, 0));
     r2.setMasse(10.0f);
@@ -98,17 +98,21 @@ int main(int argc, char** argv)
     return 1;
 }
 
-void t1() {
-    if (r1.getPosition().getX() > r2.getPosition().getX()) 
-	{ 
-		r1.addForce(Vecteur3D(-0.1, 0, 0));
-		r1.setRotation(Vecteur3D(0, 0, 1));
+void t1()
+{
+    if (r1.getPosition().getX() > r2.getPosition().getX())
+    {
+        r1.addForce(Vecteur3D(-0.1, 0, 0));
+        r1.setRotation(Vecteur3D(0, 0, 1));
 
-		r2.addForce(Vecteur3D(0.1, 0, 0));
+        r2.addForce(Vecteur3D(0.1, 0, 0));
         r2.setRotation(Vecteur3D(0, 0, -1));
-	}
+    }
 
     r1.integrate(deltaFrame);
+    Quaternion newOritentation = r1.getOrientation();
+    newOritentation.normalize();
+    r1.setOrientation(newOritentation);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
@@ -137,6 +141,9 @@ void t1() {
 void t2()
 {
     r2.integrate(deltaFrame);
+    Quaternion newOritentation = r2.getOrientation();
+    newOritentation.normalize();
+    r2.setOrientation(newOritentation);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);

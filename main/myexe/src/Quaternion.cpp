@@ -18,6 +18,7 @@ void Quaternion::normalize()
 	//Si d=0, alors r=1 (quaternion sans rotation)
     if (l_d == 0)
     {
+
         l_r = 1;
         m_data.at(0) = l_r;
         m_data.at(1) = l_i;
@@ -27,11 +28,13 @@ void Quaternion::normalize()
 	//sinon on divise tout les éléments du quaternion par sqrt(d)
     else
     {
-        l_d = 1 / sqrt(l_d);
+        l_d = 1.0f / sqrt(l_d);
         m_data.at(0) = l_d * l_r;
         m_data.at(1) = l_d * l_i;
         m_data.at(2) = l_d * l_j;
         m_data.at(3) = l_d * l_k;
+
+		//std::cout << "************** -> " << l_d << std::endl;
     }
 }
 
@@ -49,11 +52,26 @@ Quaternion& Quaternion::operator*=(const Quaternion& p_quaternion)
     float l_y2 = m_data.at(2);
     float l_z2 = m_data.at(3);
 
+	/*std::cout << "++++ l_w1 : " << l_w1 << std::endl;
+	std::cout << "++++ l_x1 : " << l_x1 << std::endl;
+	std::cout << "++++ l_y1 : " << l_y1 << std::endl;
+	std::cout << "++++ l_z1 : " << l_z1 << std::endl;
+
+	std::cout << "++++ l_w2 : " << l_w2 << std::endl;
+    std::cout << "++++ l_x2 : " << l_x2 << std::endl;
+    std::cout << "++++ l_y2 : " << l_y2 << std::endl;
+    std::cout << "++++ l_z2 : " << l_z2 << std::endl;*/
+
 	//On applique la formule du cours
     float l_w = l_w1 * l_w2 - l_x1 * l_x2 - l_y1 * l_y2 - l_z1 * l_z2;
     float l_x = l_w1 * l_x2 + l_w2 * l_x1 + l_y1 * l_z2 - l_z1 * l_y2;
     float l_y = l_w1 * l_y2 + l_w2 * l_y1 + l_z1 * l_x2 - l_x1 * l_z2;
     float l_z = l_w1 * l_z2 + l_w2 * l_z1 + l_x1 * l_y2 - l_y1 * l_x2;
+
+	/*std::cout << "++++ l_w : " << l_w << std::endl;
+    std::cout << "++++ l_x : " << l_x << std::endl;
+    std::cout << "++++ l_y : " << l_y << std::endl;
+    std::cout << "++++ l_z : " << l_z << std::endl;*/
 
 	//On modifie le quaternion
     m_data.at(0) = l_w;
@@ -160,16 +178,25 @@ void Quaternion::faireRotation(Vecteur3D& p_vecteur)
 	//On cree un vecteur destine a accueillir les donnees de p_vecteur
     std::vector<float> l_vector;
 
-    l_vector.push_back(0);
+    l_vector.push_back(1);
     l_vector.push_back(p_vecteur.getX());
     l_vector.push_back(p_vecteur.getY());
     l_vector.push_back(p_vecteur.getZ());
 
 	//On cree un quaternion a partir de ce vecteur
-    Quaternion q = Quaternion(l_vector);
+    Quaternion q = Quaternion(l_vector);/*
+    std::cout << "--------------------" << std::endl;
+	std::cout << "q avant norm : " << q.print() << std::endl;*/
 
     //On applique la rotation (self * q)
+    q.normalize();
+    //    std::cout << "q apres norm : " << q.print() << std::endl << std::endl;
+    //std::cout << "q this avant : " << this->print() << std::endl;
     *this *= q;
+    //std::cout << "q this apres sans norm : " << this->print() << std::endl;
+    this->normalize();
+    //std::cout << "q this apres avec norm: " << this->print() << std::endl;
+    //std::cout << "--------------------" << std::endl;
     ;
 }
 

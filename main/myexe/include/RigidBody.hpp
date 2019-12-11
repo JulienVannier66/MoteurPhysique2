@@ -20,7 +20,15 @@ private:
     Matrix4 m_transforme;
     Matrix3 m_inverseInertiatensor;
 
+    bool t = true;
+
 public:
+    struct BoundingSphere
+    {
+        Vecteur3D centre;
+        float rayon;
+    };
+
     /*Constructeurs et destructeur*/
 
     // constructeur par defaut
@@ -31,7 +39,7 @@ public:
         , m_angularDumping(1)
         , m_position(0, 0, 0)
         , m_velocite(0, 0, 0)
-        , m_orientation(0, 0, 0, 0)
+        , m_orientation(1, 0, 0, 0)
         , m_rotation(0, 0, 0)
         , m_forceAccum(0, 0, 0)
         , m_torqueAccum(0, 0, 0)
@@ -50,7 +58,7 @@ public:
         , m_velocite(p_velocite)
         , m_rotation(p_rotation)
         , m_orientation(p_orientation)
-        , m_transforme(p_transforme) // pas sur que ce soit necessaire
+        , m_transforme(p_transforme)
         , m_forceAccum(0, 0, 0)
         , m_torqueAccum(0, 0, 0)
         , m_inverseInertiatensor()
@@ -106,30 +114,32 @@ public:
     Quaternion getOrientation() { return m_orientation; }
     Matrix4 getTransformMatrice() { return m_transforme; }
 
-
-	/*Ajoute une force � l'accumulateur de force*/
+    /*Ajoute une force � l'accumulateur de force*/
     void addForce(Vecteur3D p_force);
 
-	/*Ajoute une couple � l'accumulateur de couple*/
+    /*Ajoute une couple � l'accumulateur de couple*/
     void addTorque(Vecteur3D p_torque);
 
-	/*vide les deux accumulateurs*/
+    /*vide les deux accumulateurs*/
     void clearAccumulateurs();
 
-	/*definit la matrice d'inertie inverse comme etant celle d'une sphere avec les formules d�fini*/
+    /*definit la matrice d'inertie inverse comme etant celle d'une sphere avec les formules d�fini*/
     void setInverseInertieTensorSphere(float p_masse, float p_rayon);
 
-	/*definit la matrice d'inertie inverse comme etant celle d'un parallelepipede rectangle avec les formules d�fini*/
+    /*definit la matrice d'inertie inverse comme etant celle d'un parallelepipede rectangle avec les
+     * formules d�fini*/
     void setInverseInertieTensorCube(float p_masse, float p_x, float p_y, float p_z);
 
     /*actiualise la matrice transforme*/
     void calculDonneesDerivees();
 
-	void integrate(float p_duration);
+    void integrate(float p_duration);
 
-	/*applique un force p_force en un poin p_point du rigidbody avec p_point et p_force dans le repere monde*/
+    /*applique un force p_force en un poin p_point du rigidbody avec p_point et p_force dans le
+     * repere monde*/
     void addForceAtPoint(Vecteur3D p_force, Vecteur3D p_point);
 
-		/*applique un force p_force en un poin p_point du rigidbody avec  p_force dans le repere monde et p_point dans le repere objet*/
+    /*applique un force p_force en un poin p_point du rigidbody avec  p_force dans le repere monde
+     * et p_point dans le repere objet*/
     void addForceAtBodyPoint(Vecteur3D p_force, Vecteur3D p_point);
 };
