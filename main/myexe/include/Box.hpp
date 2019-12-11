@@ -3,8 +3,8 @@
 
 class Box : public Primitive
 {
-private:
-    Vecteur3D m_demiLongueur = Vecteur3D(0.5f, 0.5f, 0.5f);
+//private:
+//    Vecteur3D m_demiLongueur = Vecteur3D(0.5f, 0.5f, 0.5f);
 
 public:
     Box() : Primitive()
@@ -53,4 +53,5 @@ public:
     }
 
     Vecteur3D getDemiLongueur() { return m_demiLongueur; }
+
 };

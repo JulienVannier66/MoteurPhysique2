@@ -1,7 +1,9 @@
+#pragma once
 #include "../../../external/freeglut-3.2.0/include/GL/freeglut_std.h"
 #include <Box.hpp>
 #include <CollisionData.hpp>
 #include <GravityGenerator.hpp>
+#include <Plane.hpp>
 #include <Primitive.hpp>
 #include <RigidBody.hpp>
 #include <Plane.hpp>
@@ -11,9 +13,9 @@
 void inputKeyBoard(unsigned char key, int x, int y);
 void renderScene(void);
 
-    Box r1;
-	Plane p1;
-    GravityGenerator g;
+Plane p1;
+Box r1;
+GravityGenerator g;
 
 float startFrame = 0;
 float endFrame = 0;
@@ -21,6 +23,46 @@ float deltaFrame = 0.016f;
 float i = 0;
 int nbFrames = 0;
 float lastTime = 0;
+
+/*v�rifie s'il il y a un contact r�el entre deux primitives, si c'est le cas, on rajoute le contact
+ * dans data*/
+void generateContact(Primitive p_prim1, Primitive p_prim2, CollisionData& p_data)  //ne fonctionne pas c'est pour cela que nous avons trait� la collision avec un cas plus particulier
+{
+    Primitive* l_prim = &Primitive(p_prim1);
+    Box* p_prim = dynamic_cast<Box*>(l_prim);
+    if (p_prim != 0) { std::cout << "ton pere" << std::endl; };
+    if (p_prim == nullptr) { std::cout << "ta mere" << std::endl; }
+}
+
+/*v�rifie s'il il y a un contact r�el entre un plan et une box, si c'est le cas, on rajoute le
+ * contact dans data*/
+void generateContactBoxPlane(Box p_box, Plane p_plane, CollisionData& p_data)
+{
+    Matrix4 l_finalMatrix = r1.getBody()->getTransformMatrice();
+    Vecteur3D cubePoints[8];
+    float x = r1.getDemiLongueur().getX();
+    float y = r1.getDemiLongueur().getY();
+    float z = r1.getDemiLongueur().getZ();
+    cubePoints[0] = l_finalMatrix * Vecteur3D(-x, -y, z);
+    cubePoints[1] = l_finalMatrix * Vecteur3D(-x, y, z);
+    cubePoints[2] = l_finalMatrix * Vecteur3D(x, y, z);
+    cubePoints[3] = l_finalMatrix * Vecteur3D(x, -y, z);
+
+    cubePoints[4] = l_finalMatrix * Vecteur3D(-x, -y, -z);
+    cubePoints[5] = l_finalMatrix * Vecteur3D(-x, y, -z);
+    cubePoints[6] = l_finalMatrix * Vecteur3D(x, y, -z);
+    cubePoints[7] = l_finalMatrix * Vecteur3D(x, -y, -z);
+    // int countPos = 0;
+    for (int i = 0; i < 8; i++)
+    {
+        if (float dist =
+                cubePoints[i].produitScalaire(p_plane.getNormal()) + p_plane.getOffset() <= 0)
+        { // countPos++;
+            Contact l_contact(cubePoints[i], p_plane.getNormal(), dist);
+            p_data.addContact(l_contact);
+        }
+    }
+}
 
 void inputKeyBoard(unsigned char key, int x, int y) { std::cout << "t" << std::endl; }
 // Calculate FPS
@@ -31,7 +73,7 @@ void calculFrame(int& nbFrames, float& lastTime)
     if (currentTime - lastTime >= 1000)
     {
         // cout and reset timer
-     /*   std::cout << "FPS : " << nbFrames << std::endl;*/
+        /*   std::cout << "FPS : " << nbFrames << std::endl;*/
         nbFrames = 0;
         lastTime += 1000;
     }
@@ -100,14 +142,14 @@ void renderScene(void)
     cubePoints[6] = l_finalMatrix * Vecteur3D(x, y, -z);
     cubePoints[7] = l_finalMatrix * Vecteur3D(x, -y, -z);
 
-	/*std::cout << "cubePoints[0] : " << cubePoints[0] << std::endl;
-	std::cout << "cubePoints[1] : " << cubePoints[1] << std::endl;
-	std::cout << "cubePoints[2] : " << cubePoints[2] << std::endl;
-	std::cout << "cubePoints[3] : " << cubePoints[3] << std::endl;
-	std::cout << "cubePoints[4] : " << cubePoints[4] << std::endl;
-	std::cout << "cubePoints[5] : " << cubePoints[5] << std::endl;
-	std::cout << "cubePoints[6] : " << cubePoints[6] << std::endl;
-	std::cout << "cubePoints[7] : " << cubePoints[7] << std::endl;*/
+    /*std::cout << "cubePoints[0] : " << cubePoints[0] << std::endl;
+    std::cout << "cubePoints[1] : " << cubePoints[1] << std::endl;
+    std::cout << "cubePoints[2] : " << cubePoints[2] << std::endl;
+    std::cout << "cubePoints[3] : " << cubePoints[3] << std::endl;
+    std::cout << "cubePoints[4] : " << cubePoints[4] << std::endl;
+    std::cout << "cubePoints[5] : " << cubePoints[5] << std::endl;
+    std::cout << "cubePoints[6] : " << cubePoints[6] << std::endl;
+    std::cout << "cubePoints[7] : " << cubePoints[7] << std::endl;*/
 
     glBegin(GL_QUADS);
     // face 1 devant
@@ -177,7 +219,7 @@ int main(int argc, char** argv)
 {
     r1.getBody()->setPosition(Vecteur3D(-100, -10, -50));
     r1.getBody()->setRotation(Vecteur3D(0, 0, 1));
-    //r1.addForce(Vecteur3D(70, 30, 0));
+    // r1.addForce(Vecteur3D(70, 30, 0));
     r1.setDemiLongueur(5, 5, 5);
 
 	p1.setOffset(100);
@@ -202,9 +244,7 @@ int main(int argc, char** argv)
     return 1;
 }
 
-
-
-//bool pointInCube(Vecteur3D point, Primitive prim)
+// bool pointInCube(Vecteur3D point, Primitive prim)
 //{
 //    bool temp;
 //    float xmin, xmax, ymin, ymax, zmin, zmax;
@@ -217,5 +257,5 @@ int main(int argc, char** argv)
 //    }
 //    temp = point.getX <
 //} //// test Vertex-Face, on regarde  si un sommet de prim1 est dans prim2
-  // bool vertex_Face = false;
-  // for (int i = 0; i < 8; i++) { vertex_Face = vertex_Face || prim1. }
+// bool vertex_Face = false;
+// for (int i = 0; i < 8; i++) { vertex_Face = vertex_Face || prim1. }
