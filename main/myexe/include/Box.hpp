@@ -37,10 +37,7 @@ public:
         m_demiLongueur.setY(p_box.m_demiLongueur.getY());
         m_demiLongueur.setZ(p_box.m_demiLongueur.getZ());
         setBoundingSphere(p_box.getBody()->getPosition(),
-                          sqrt(pow(p_box.getDemiLongueur().getX(), 2) +
-                               pow(p_box.getDemiLongueur().getY(), 2) +
-                               pow(p_box.getDemiLongueur().getZ(), 2)) /
-                              2);
+                          p_box.getDemiLongueur().getX() * sqrt(3));
     }
 
     ~Box() {}

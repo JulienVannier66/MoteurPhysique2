@@ -37,7 +37,5 @@ set(HEADERS
 			${INCLUDE_FOLDER}/Plane.hpp)
 #Main exec
 add_executable(${PROJECT_NAME} ${SOURCE_FOLDER}/main.cpp ${SOURCES} ${HEADERS})
-add_executable(${PROJECT_NAME}_2 ${SOURCE_FOLDER}/main_v1.cpp ${SOURCES} ${HEADERS})
 
 target_link_libraries(${PROJECT_NAME} freeglut_static)
-target_link_libraries(${PROJECT_NAME}_2 freeglut_static)
