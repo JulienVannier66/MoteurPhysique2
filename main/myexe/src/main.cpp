@@ -4,19 +4,15 @@
 #include <GravityGenerator.hpp>
 #include <Primitive.hpp>
 #include <RigidBody.hpp>
+#include <Plane.hpp>
 #include <iostream>
 #include <typeinfo>
 
 void inputKeyBoard(unsigned char key, int x, int y);
 void renderScene(void);
 
-/*v�rifie s'il il y a un contact r�el entre deux primitive, si c'est le cas, on rajoute le contact
- * dans data*/
-void generateContact(Primitive p_prim1, Primitive p_prim2, CollisionData& p_data)
-{
-    if (Box* p_prim1 = dynamic_cast<Box*>(p_prim1)) { std::cout << "caca" << std::endl; }
-}
     Box r1;
+	Plane p1;
     GravityGenerator g;
 
 float startFrame = 0;
@@ -157,6 +153,14 @@ void renderScene(void)
     glVertex3f(cubePoints[4].getX(), cubePoints[4].getY(), cubePoints[4].getZ());
     glEnd();
 
+	glBegin(GL_QUADS);
+    glColor3b(60, 60, 60);
+        glVertex3f(p1.getOffset(), 10, -10);
+		glVertex3f(p1.getOffset(), -10, -10);
+		glVertex3f(p1.getOffset() +10, -10, 10);
+		glVertex3f(p1.getOffset() + 10, 10, 10);
+    glEnd();
+
     glPopMatrix();
     glFlush();
 
@@ -175,8 +179,11 @@ int main(int argc, char** argv)
     r1.getBody()->setRotation(Vecteur3D(0, 0, 1));
     //r1.addForce(Vecteur3D(70, 30, 0));
     r1.setDemiLongueur(5, 5, 5);
+
+	p1.setOffset(100);
+    p1.setNormal(Vecteur3D(1, 0, 0));
+
     CollisionData col;
-    generateContact(r1, r1, col);
     // init GLUT and create window
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
